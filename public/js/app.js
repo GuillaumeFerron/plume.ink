@@ -1829,7 +1829,7 @@ __webpack_require__.r(__webpack_exports__);
       clearTimeout(this.timeout);
       this.timeout = setTimeout(function () {
         _this.updatePage();
-      }, 1000);
+      }, this.$store.state.loadingTimeout);
     },
     updatePage: function updatePage() {
       var _this2 = this;
@@ -51490,7 +51490,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     loading: false,
-    loadingError: ''
+    loadingError: '',
+    loadingTimeout: 1000
   },
   getters: {
     loading: function loading(state) {

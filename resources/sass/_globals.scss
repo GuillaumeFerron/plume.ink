@@ -1,0 +1,37 @@
+/**
+  Global styling rules to be used throughout the application
+ */
+
+.seo-title {
+  max-height: 0;
+  max-width: 0;
+  opacity: 0;
+  position: absolute;
+  z-index: -99999999;
+  top: -99999999px;
+  left: -99999999px;
+}
+
+* {
+  font-family: monospace;
+}
+
+main {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+::selection {
+  background: $plume-yellow; /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+::-moz-selection {
+  background: $plume-yellow-300; /* Gecko Browsers */
+}
+
+input,
+textarea,
+[contenteditable] {
+  caret-color: $plume-yellow;
+}

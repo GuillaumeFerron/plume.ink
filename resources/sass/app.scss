@@ -1,26 +1,14 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-// Variables
-@import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-* {
-  font-family: monospace;
-}
-
-main {
-  min-height: 100vh;
-  background-color: #fff;
-}
-
-.login-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+// Fonts
+@import 'fonts';
+// Variables
+@import 'variables';
+// Mixins
+@import 'mixins';
+// Globals
+@import 'globals';
+// Custom
+@import 'custom';
+// Animations
+@import 'animations';

@@ -28,7 +28,7 @@
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
           this.updatePage()
-        }, 1000)
+        }, this.$store.state.loadingTimeout)
       },
       updatePage() {
         window.axios.post('/api/v1/pages', {

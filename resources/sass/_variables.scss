@@ -1,20 +1,26 @@
+/**
+  Variables to be used throughout the application
+ */
 
-// Body
-$body-bg: #f8fafc;
+$plume-yellow: rgba(244, 180, 0, 1);
+$plume-yellow-900: rgba(244, 180, 0, 0.9);
+$plume-yellow-800: rgba(244, 180, 0, 0.8);
+$plume-yellow-700: rgba(244, 180, 0, 0.7);
+$plume-yellow-600: rgba(244, 180, 0, 0.6);
+$plume-yellow-500: rgba(244, 180, 0, 0.5);
+$plume-yellow-400: rgba(244, 180, 0, 0.4);
+$plume-yellow-300: rgba(244, 180, 0, 0.3);
+$plume-yellow-200: rgba(244, 180, 0, 0.2);
+$plume-yellow-100: rgba(244, 180, 0, 0.1);
 
-// Typography
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
-
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66D9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+$grid-breakpoints: () !default;
+$grid-breakpoints: map-merge(
+                (
+                        xs: 0,
+                        sm: 576px,
+                        md: 768px,
+                        lg: 992px,
+                        xl: 1200px
+                ),
+                $grid-breakpoints
+);
