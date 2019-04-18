@@ -1773,6 +1773,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Loader',
   props: {
@@ -1824,22 +1828,24 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit('TOGGLE_LOADING', true);
       clearTimeout(this.timeout);
       this.timeout = setTimeout(function () {
-        _this.$store.commit('TOGGLE_LOADING', false);
+        _this.updatePage();
       }, 1000);
-    }
-  },
-  watch: {
-    '$store.state.loading': function $storeStateLoading(newValue, oldValue) {
-      if (!newValue) {
-        window.axios.post('/api/v1/pages', {
-          page_id: this.page.id,
-          body: this.$el.innerHTML
-        }).then(function (response) {
-          console.log(response.data.message);
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
+    },
+    updatePage: function updatePage() {
+      var _this2 = this;
+
+      window.axios.post('/api/v1/pages', {
+        page_id: this.page.id,
+        body: this.$el.innerHTML
+      }).then(function (response) {
+        console.log(response.data.message);
+
+        _this2.$store.commit('TOGGLE_LOADING', false);
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.$store.commit('ADD_LOADING_ERROR', error.message);
+      });
     }
   }
 });
@@ -6347,7 +6353,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 10px;\n  right: 10px;\n}\n.fade-enter-active[data-v-e79ec684], .fade-leave-active[data-v-e79ec684] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-e79ec684], .fade-leave-to[data-v-e79ec684] {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 10px;\n  right: 10px;\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}\n.fade-enter-active[data-v-e79ec684], .fade-leave-active[data-v-e79ec684] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-e79ec684], .fade-leave-to[data-v-e79ec684] {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -37878,15 +37884,25 @@ var render = function() {
     { staticClass: "loader-container text-muted" },
     [
       _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-        !_vm.loading && !_vm.$store.state.loading
+        !_vm.loading &&
+        !_vm.$store.state.loading &&
+        !_vm.$store.state.loadingError
           ? _c("div", { key: "loader-loaded", staticClass: "loader-loaded" }, [
               _c("i", { staticClass: "fa fa-check" })
             ])
-          : _c(
+          : !_vm.loading &&
+            !_vm.$store.state.loading &&
+            !!_vm.$store.state.loadingError
+          ? _c("div", { key: "loader-error", staticClass: "loader-error" }, [
+              _c("i", { staticClass: "fa fa-times" })
+            ])
+          : true
+          ? _c(
               "div",
               { key: "loader-loading", staticClass: "loader-loading" },
-              [_c("i", { staticClass: "fa fa-times" })]
+              [_c("i", { staticClass: "fa fa-circle-notch" })]
             )
+          : undefined
       ])
     ],
     1
@@ -51473,17 +51489,25 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    loading: false
+    loading: false,
+    loadingError: ''
   },
   getters: {
     loading: function loading(state) {
       return state.loading;
+    },
+    loadingError: function loadingError(state) {
+      return state.loadingError;
     }
   },
   mutations: {
     TOGGLE_LOADING: function TOGGLE_LOADING(state) {
       var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       state.loading = value;
+    },
+    ADD_LOADING_ERROR: function ADD_LOADING_ERROR(state) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Error !';
+      state.loadingError = value;
     }
   },
   actions: {//

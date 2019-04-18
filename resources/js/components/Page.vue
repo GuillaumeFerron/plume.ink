@@ -27,24 +27,22 @@
         this.$store.commit('TOGGLE_LOADING', true)
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
-          this.$store.commit('TOGGLE_LOADING', false)
+          this.updatePage()
         }, 1000)
-      }
-    },
-    watch: {
-      '$store.state.loading'(newValue, oldValue) {
-        if (!newValue) {
-          window.axios.post('/api/v1/pages', {
-            page_id: this.page.id,
-            body: this.$el.innerHTML
+      },
+      updatePage() {
+        window.axios.post('/api/v1/pages', {
+          page_id: this.page.id,
+          body: this.$el.innerHTML
+        })
+          .then(response => {
+            console.log(response.data.message)
+            this.$store.commit('TOGGLE_LOADING', false)
           })
-            .then(response => {
-              console.log(response.data.message)
-            })
-            .catch(error => {
-              console.log(error)
-            })
-        }
+          .catch(error => {
+            console.log(error)
+            this.$store.commit('ADD_LOADING_ERROR', error.message)
+          })
       }
     }
   }
