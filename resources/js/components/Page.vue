@@ -51,6 +51,12 @@
 </script>
 
 <style scoped>
+  .page-container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .page-container:focus {
     outline: none;
   }

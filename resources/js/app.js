@@ -21,7 +21,9 @@ Vue.component('plume', require('./components/Plume.vue').default)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-  el: '#plume',
-  store
-})
+if ($('#plume')) {
+  const app = new Vue({
+    el: '#plume',
+    store
+  })
+}

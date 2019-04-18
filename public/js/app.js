@@ -6366,7 +6366,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.page-container[data-v-524c0c0c]:focus {\n  outline: none;\n}\n", ""]);
+exports.push([module.i, "\n.page-container[data-v-524c0c0c] {\n  max-width: 800px;\n  margin-left: auto;\n  margin-right: auto;\n}\n.page-container[data-v-524c0c0c]:focus {\n  outline: none;\n}\n", ""]);
 
 // exports
 
@@ -51146,10 +51146,12 @@ Vue.component('plume', __webpack_require__(/*! ./components/Plume.vue */ "./reso
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
-  el: '#plume',
-  store: _store__WEBPACK_IMPORTED_MODULE_0__["default"]
-});
+if ($('#plume')) {
+  var app = new Vue({
+    el: '#plume',
+    store: _store__WEBPACK_IMPORTED_MODULE_0__["default"]
+  });
+}
 
 /***/ }),
 
