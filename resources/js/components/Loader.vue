@@ -24,12 +24,14 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  @import '../../sass/_variables.scss';
+
   .loader-container {
     position: fixed;
     z-index: 99;
-    bottom: 10px;
-    right: 10px;
+    bottom: $page-padding;
+    right: $page-padding;
   }
 
   .loader-loading {

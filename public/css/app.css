@@ -10722,6 +10722,10 @@ textarea,
   caret-color: #f4b400;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
 /**
   Customized properties (to override plugin styling for example)
  */

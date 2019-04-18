@@ -35,3 +35,7 @@ textarea,
 [contenteditable] {
   caret-color: $plume-yellow;
 }
+
+.clickable:hover {
+  cursor: pointer;
+}

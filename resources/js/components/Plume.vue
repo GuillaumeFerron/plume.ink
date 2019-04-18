@@ -1,5 +1,6 @@
 <template>
   <div class="plume-container">
+    <sidebar></sidebar>
     <page v-for="(page, index) in pages" :page="page" :key="`page-${index}`"></page>
     <loader :loading="false"></loader>
   </div>
@@ -8,10 +9,11 @@
 <script>
   import Page from './Page'
   import Loader from './Loader'
+  import Sidebar from './Sidebar'
 
   export default {
     name: 'Plume',
-    components: { Loader, Page },
+    components: { Sidebar, Loader, Page },
     data() {
       return {
         pages: []
@@ -29,6 +31,5 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
 </style>
