@@ -36,6 +36,17 @@ textarea,
   caret-color: $plume-yellow;
 }
 
-.clickable:hover {
-  cursor: pointer;
+.hoverable {
+  @include transition();
+
+  &:hover {
+    color: $plume-yellow !important;
+    cursor: default;
+  }
+}
+
+.clickable {
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -1,6 +1,7 @@
 <template>
   <div :class="`sidebar-container ${sidebarVisible ? 'sidebar-visible' : ''}`">
-    <div class="sidebar-toggle text-muted clickable" @click="sidebarVisible = !sidebarVisible"><i class="fa fa-ellipsis-h"></i></div>
+    <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"><i
+      class="fa fa-ellipsis-h"></i></div>
   </div>
 </template>
 
@@ -32,24 +33,26 @@
     -ms-transform: translate(-100%, 0);
     -o-transform: translate(-100%, 0);
     transform: translate(-100%, 0);
+    background-color: #fff;
+    border-right: solid 1px lightgrey;
 
     &.sidebar-visible {
-      -webkit-transform: translate(0, 0);
-      -moz-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-      -o-transform: translate(0, 0);
-      transform: translate(0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      -o-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
     }
 
     .sidebar-toggle {
       position: absolute;
       bottom: 10px;
       right: 0;
-      -webkit-transform: translate(calc(100% + #{$page-padding}), 0);
-      -moz-transform: translate(calc(100% + #{$page-padding}), 0);
-      -ms-transform: translate(calc(100% + #{$page-padding}), 0);
-      -o-transform: translate(calc(100% + #{$page-padding}), 0);
-      transform: translate(calc(100% + #{$page-padding}), 0);
+      -webkit-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
+      -moz-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
+      -ms-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
+      -o-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
+      transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
     }
   }
 </style>

@@ -1777,13 +1777,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Loader',
+  data: function data() {
+    return {
+      hovered: false,
+      top: '100%',
+      left: '100%'
+    };
+  },
   props: {
     loading: {
       type: Boolean,
       "default": false
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$el.querySelector('.icon-container').addEventListener('mousemove', function (e) {
+      _this.hovered = true;
+      _this.top = e.pageY;
+      _this.left = e.pageX;
+      console.log(_this.top, '   ', _this.left);
+    });
   }
 });
 
@@ -1909,6 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -6383,7 +6415,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 10px;\n  right: 10px;\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}\n.fade-enter-active[data-v-e79ec684], .fade-leave-active[data-v-e79ec684] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-e79ec684], .fade-leave-to[data-v-e79ec684] {\n  opacity: 0;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 15px;\n  right: 15px;\n}\n.hover-message[data-v-e79ec684] {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.1);\n  border-radius: 4px;\n  width: 100px;\n  text-align: center;\n  vertical-align: middle;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  -webkit-transform: translate(-100%, -100%);\n  transform: translate(-100%, -100%);\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}\n.fade-enter-active[data-v-e79ec684], .fade-leave-active[data-v-e79ec684] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-e79ec684], .fade-leave-to[data-v-e79ec684] {\n  opacity: 0;\n}", ""]);
 
 // exports
 
@@ -6402,7 +6434,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 300px;\n  height: 100vh;\n  z-index: 99;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate(0, 0);\n  transform: translate(0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 10px;\n  right: 0;\n  -webkit-transform: translate(calc(100% + 10px), 0);\n  transform: translate(calc(100% + 10px), 0);\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100vh;\n  z-index: 99;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  background-color: #fff;\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 10px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n}", ""]);
 
 // exports
 
@@ -37962,27 +37994,90 @@ var render = function() {
     "div",
     { staticClass: "loader-container text-muted" },
     [
-      _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-        !_vm.loading &&
-        !_vm.$store.state.loading &&
-        !_vm.$store.state.loadingError
-          ? _c("div", { key: "loader-loaded", staticClass: "loader-loaded" }, [
-              _c("i", { staticClass: "fa fa-check" })
-            ])
-          : !_vm.loading &&
-            !_vm.$store.state.loading &&
-            !!_vm.$store.state.loadingError
-          ? _c("div", { key: "loader-error", staticClass: "loader-error" }, [
-              _c("i", { staticClass: "fa fa-times" })
-            ])
-          : true
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.hovered
           ? _c(
               "div",
-              { key: "loader-loading", staticClass: "loader-loading" },
-              [_c("i", { staticClass: "fa fa-circle-notch" })]
+              {
+                staticClass: "hover-message",
+                style: { top: _vm.top + "px", left: _vm.left + "px" }
+              },
+              [
+                _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+                  !_vm.loading &&
+                  !_vm.$store.state.loading &&
+                  !_vm.$store.state.loadingError
+                    ? _c("span", { key: "loader-loaded" }, [
+                        _vm._v("All good !")
+                      ])
+                    : !_vm.loading &&
+                      !_vm.$store.state.loading &&
+                      !!_vm.$store.state.loadingError
+                    ? _c("span", { key: "loader-error" }, [
+                        _vm._v(
+                          "Oops ! " + _vm._s(_vm.$store.state.loadingError)
+                        )
+                      ])
+                    : _vm.loading || _vm.$store.state.loading
+                    ? _c("span", { key: "loader-loading" }, [
+                        _vm._v("Hold on...")
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              1
             )
-          : undefined
-      ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "icon-container",
+          on: {
+            mouseout: function($event) {
+              _vm.hovered = false
+            }
+          }
+        },
+        [
+          _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+            !_vm.loading &&
+            !_vm.$store.state.loading &&
+            !_vm.$store.state.loadingError
+              ? _c(
+                  "div",
+                  {
+                    key: "loader-loaded",
+                    staticClass: "loader-loaded hoverable"
+                  },
+                  [_c("i", { staticClass: "fa fa-check" })]
+                )
+              : !_vm.loading &&
+                !_vm.$store.state.loading &&
+                !!_vm.$store.state.loadingError
+              ? _c(
+                  "div",
+                  {
+                    key: "loader-error",
+                    staticClass: "loader-error hoverable"
+                  },
+                  [_c("i", { staticClass: "fa fa-times" })]
+                )
+              : _vm.loading || _vm.$store.state.loading
+              ? _c(
+                  "div",
+                  {
+                    key: "loader-loading",
+                    staticClass: "loader-loading hoverable"
+                  },
+                  [_c("i", { staticClass: "fa fa-circle-notch" })]
+                )
+              : _vm._e()
+          ])
+        ],
+        1
+      )
     ],
     1
   )
@@ -38085,7 +38180,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "sidebar-toggle text-muted clickable",
+          staticClass: "sidebar-toggle text-muted clickable hoverable",
           on: {
             click: function($event) {
               _vm.sidebarVisible = !_vm.sidebarVisible

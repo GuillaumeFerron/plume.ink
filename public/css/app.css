@@ -10722,6 +10722,16 @@ textarea,
   caret-color: #f4b400;
 }
 
+.hoverable {
+  -ie-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.hoverable:hover {
+  color: #f4b400 !important;
+  cursor: default;
+}
+
 .clickable:hover {
   cursor: pointer;
 }
