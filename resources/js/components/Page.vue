@@ -1,17 +1,20 @@
 <template>
-  <div class="page-container" contenteditable="true" @input="pageChange" v-html="page.body">
+  <div class="page-container" contenteditable="true" @input="pageChange" :inner-html.prop="page.body">
   </div>
 </template>
 
 <script>
   import Loader from './Loader'
+  import parser from '../mixins/parser'
 
   export default {
     name: 'Page',
+    mixins: [parser],
     components: { Loader },
     data() {
       return {
-        timeout: ''
+        timeout: '',
+        content: ''
       }
     },
     props: {
@@ -20,11 +23,15 @@
         type:
         Object
       }
+    },
 
+    mounted() {
+      this.content = this.page.body
     },
     methods: {
       pageChange() {
         this.$store.commit('TOGGLE_LOADING', true)
+        this.content = this.$el.innerHTML
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
           this.updatePage()
@@ -33,7 +40,7 @@
       updatePage() {
         window.axios.post('/api/v1/pages', {
           page_id: this.page.id,
-          body: this.$el.innerHTML
+          body: this.content
         })
           .then(response => {
             console.log(response.data.message)

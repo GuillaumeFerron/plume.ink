@@ -1811,9 +1811,8 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$el.querySelector('.icon-container').addEventListener('mousemove', function (e) {
       _this.hovered = true;
-      _this.top = e.pageY;
-      _this.left = e.pageX;
-      console.log(_this.top, '   ', _this.left);
+      _this.top = e.clientY;
+      _this.left = e.clientX;
     });
   }
 });
@@ -1830,20 +1829,24 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
+/* harmony import */ var _mixins_parser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/parser */ "./resources/js/mixins/parser.js");
 //
 //
 //
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Page',
+  mixins: [_mixins_parser__WEBPACK_IMPORTED_MODULE_1__["default"]],
   components: {
     Loader: _Loader__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      timeout: ''
+      timeout: '',
+      content: ''
     };
   },
   props: {
@@ -1852,11 +1855,15 @@ __webpack_require__.r(__webpack_exports__);
       type: Object
     }
   },
+  mounted: function mounted() {
+    this.content = this.page.body;
+  },
   methods: {
     pageChange: function pageChange() {
       var _this = this;
 
       this.$store.commit('TOGGLE_LOADING', true);
+      this.content = this.$el.innerHTML;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(function () {
         _this.updatePage();
@@ -1867,7 +1874,7 @@ __webpack_require__.r(__webpack_exports__);
 
       window.axios.post('/api/v1/pages', {
         page_id: this.page.id,
-        body: this.$el.innerHTML
+        body: this.content
       }).then(function (response) {
         console.log(response.data.message);
 
@@ -38004,6 +38011,7 @@ var render = function() {
               },
               [
                 _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+                  _vm._v("hr\n        "),
                   !_vm.loading &&
                   !_vm.$store.state.loading &&
                   !_vm.$store.state.loadingError
@@ -38107,7 +38115,7 @@ var render = function() {
   return _c("div", {
     staticClass: "page-container",
     attrs: { contenteditable: "true" },
-    domProps: { innerHTML: _vm._s(_vm.page.body) },
+    domProps: { innerHTML: _vm.page.body },
     on: { input: _vm.pageChange }
   })
 }
@@ -51776,6 +51784,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Sidebar_vue_vue_type_template_id_81fbb27e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/mixins/parser.js":
+/*!***************************************!*\
+  !*** ./resources/js/mixins/parser.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    /**
+     * Entirely parsed content
+     *
+     * @param str
+     * @returns string
+     */
+    parsedContent: function parsedContent() {
+      var parsedStr = this.content;
+      parsedStr = this.divider(parsedStr);
+      return parsedStr;
+    }
+  },
+  methods: {
+    /**
+     * 3 dashes or more will be converted in a divider
+     *
+     * @param str
+     * @returns string
+     */
+    divider: function divider(str) {
+      return str.replace(new RegExp('-{3,}', 'g'), '<hr>');
+    }
+  }
+});
 
 /***/ }),
 

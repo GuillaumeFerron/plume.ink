@@ -2,7 +2,7 @@
   <div class="loader-container text-muted">
     <transition name="fade">
       <div class="hover-message" v-if="hovered" :style="{top: top + 'px', left: left + 'px'}">
-        <transition name="fade" mode="out-in">
+        <transition name="fade" mode="out-in">hr
           <span key="loader-loaded"
                 v-if="!loading && !$store.state.loading && !$store.state.loadingError">All good !</span>
           <span key="loader-error" v-else-if="!loading && !$store.state.loading && !!$store.state.loadingError">Oops ! {{ $store.state.loadingError }}</span>
@@ -45,9 +45,8 @@
     mounted() {
       this.$el.querySelector('.icon-container').addEventListener('mousemove', (e) => {
         this.hovered = true
-        this.top = e.pageY
-        this.left = e.pageX
-        console.log(this.top, '   ', this.left)
+        this.top = e.clientY
+        this.left = e.clientX
       })
     }
   }
