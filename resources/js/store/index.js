@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import pages from './pages'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,9 @@ export default new Vuex.Store({
     loadingTimeout: 1000
   },
   getters: {
-    loading: state => state.loading,
+    loading: (state, getters) => {
+      return state.loading || getters.updating
+    },
     loadingError: state => state.loadingError
   },
   mutations: {
@@ -22,6 +25,12 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    //
+    init({ state, commit, dispatch }) {
+      dispatch('initPages')
+    }
+  },
+  modules: {
+    namespaced: true,
+    pages: pages
   }
 })

@@ -24,32 +24,27 @@
         Object
       }
     },
-
+    watch: {
+      '$store.state.pages.saveAll'(newValue, oldValue) {
+        if (newValue) {
+          this.$store.dispatch('updatePage', { id: this.page.id, content: this.content })
+        }
+      }
+    },
     mounted() {
       this.content = this.page.body
     },
     methods: {
+      /**
+       * Triggered when the user changes the pag content
+       */
       pageChange() {
         this.$store.commit('TOGGLE_LOADING', true)
         this.content = this.$el.innerHTML
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
-          this.updatePage()
+          this.$store.dispatch('updatePage', { id: this.page.id, content: this.content })
         }, this.$store.state.loadingTimeout)
-      },
-      updatePage() {
-        window.axios.post(`/api/v1/pages?api_token=${laravel.apiToken}`, {
-          page_id: this.page.id,
-          body: this.content
-        })
-          .then(response => {
-            console.log(response.data.message)
-            this.$store.commit('TOGGLE_LOADING', false)
-          })
-          .catch(error => {
-            console.log(error)
-            this.$store.commit('ADD_LOADING_ERROR', error.message)
-          })
       }
     }
   }

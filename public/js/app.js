@@ -1855,10 +1855,23 @@ __webpack_require__.r(__webpack_exports__);
       type: Object
     }
   },
+  watch: {
+    '$store.state.pages.saveAll': function $storeStatePagesSaveAll(newValue, oldValue) {
+      if (newValue) {
+        this.$store.dispatch('updatePage', {
+          id: this.page.id,
+          content: this.content
+        });
+      }
+    }
+  },
   mounted: function mounted() {
     this.content = this.page.body;
   },
   methods: {
+    /**
+     * Triggered when the user changes the pag content
+     */
     pageChange: function pageChange() {
       var _this = this;
 
@@ -1866,24 +1879,11 @@ __webpack_require__.r(__webpack_exports__);
       this.content = this.$el.innerHTML;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(function () {
-        _this.updatePage();
+        _this.$store.dispatch('updatePage', {
+          id: _this.page.id,
+          content: _this.content
+        });
       }, this.$store.state.loadingTimeout);
-    },
-    updatePage: function updatePage() {
-      var _this2 = this;
-
-      window.axios.post("/api/v1/pages?api_token=".concat(laravel.apiToken), {
-        page_id: this.page.id,
-        body: this.content
-      }).then(function (response) {
-        console.log(response.data.message);
-
-        _this2.$store.commit('TOGGLE_LOADING', false);
-      })["catch"](function (error) {
-        console.log(error);
-
-        _this2.$store.commit('ADD_LOADING_ERROR', error.message);
-      });
     }
   }
 });
@@ -1902,6 +1902,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Page */ "./resources/js/components/Page.vue");
 /* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _Sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Sidebar */ "./resources/js/components/Sidebar.vue");
+/* harmony import */ var _mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mixins/keyboardManagement */ "./resources/js/mixins/keyboardManagement.js");
 //
 //
 //
@@ -1910,6 +1911,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -1920,20 +1922,7 @@ __webpack_require__.r(__webpack_exports__);
     Loader: _Loader__WEBPACK_IMPORTED_MODULE_1__["default"],
     Page: _Page__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  data: function data() {
-    return {
-      pages: []
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    window.axios.get("/api/v1/pages?api_token=".concat(laravel.apiToken)).then(function (response) {
-      _this.pages = response.data.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
+  mixins: [_mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__["default"]]
 });
 
 /***/ }),
@@ -38011,19 +38000,19 @@ var render = function() {
               },
               [
                 _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-                  !!_vm.$store.state.loadingError
+                  !!_vm.$store.getters.loadingError
                     ? _c("span", { key: "loader-error" }, [
                         _vm._v(
-                          "Oops ! " + _vm._s(_vm.$store.state.loadingError)
+                          "Oops ! " + _vm._s(_vm.$store.getters.loadingError)
                         )
                       ])
                     : !_vm.loading &&
-                      !_vm.$store.state.loading &&
-                      !_vm.$store.state.loadingError
+                      !_vm.$store.getters.loading &&
+                      !_vm.$store.getters.loadingError
                     ? _c("span", { key: "loader-loaded" }, [
                         _vm._v("All good !")
                       ])
-                    : _vm.loading || _vm.$store.state.loading
+                    : _vm.loading || _vm.$store.getters.loading
                     ? _c("span", { key: "loader-loading" }, [
                         _vm._v("Hold on...")
                       ])
@@ -38047,7 +38036,7 @@ var render = function() {
         },
         [
           _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-            !!_vm.$store.state.loadingError
+            !!_vm.$store.getters.loadingError
               ? _c(
                   "div",
                   {
@@ -38057,8 +38046,8 @@ var render = function() {
                   [_c("i", { staticClass: "fa fa-times" })]
                 )
               : !_vm.loading &&
-                !_vm.$store.state.loading &&
-                !_vm.$store.state.loadingError
+                !_vm.$store.getters.loading &&
+                !_vm.$store.getters.loadingError
               ? _c(
                   "div",
                   {
@@ -38067,7 +38056,7 @@ var render = function() {
                   },
                   [_c("i", { staticClass: "fa fa-check" })]
                 )
-              : _vm.loading || _vm.$store.state.loading
+              : _vm.loading || _vm.$store.getters.loading
               ? _c(
                   "div",
                   {
@@ -38142,7 +38131,7 @@ var render = function() {
     [
       _c("sidebar"),
       _vm._v(" "),
-      _vm._l(_vm.pages, function(page, index) {
+      _vm._l(_vm.$store.state.pages.pages, function(page, index) {
         return _c("page", { key: "page-" + index, attrs: { page: page } })
       }),
       _vm._v(" "),
@@ -51375,7 +51364,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
- // const files = require.context('./', true, /\.vue$/i);
+
+_store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('init'); // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('plume', __webpack_require__(/*! ./components/Plume.vue */ "./resources/js/components/Plume.vue")["default"]);
@@ -51782,6 +51772,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/mixins/keyboardManagement.js":
+/*!***************************************************!*\
+  !*** ./resources/js/mixins/keyboardManagement.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cmdPressed: false,
+      ctrlPressed: false
+    };
+  },
+  mounted: function mounted() {
+    this.$el.addEventListener('keydown', this.keyListening);
+  },
+  methods: {
+    attemptToSave: function attemptToSave(e) {
+      if ((this.cmdPressed || this.ctrlPressed) && e.keyCode === 83) {
+        e.preventDefault();
+        this.$store.commit('SAVE_ALL');
+      }
+    },
+    attemptToRefresh: function attemptToRefresh(e) {
+      if ((this.cmdPressed || this.ctrlPressed) && e.keyCode === 82) {
+        e.preventDefault();
+
+        if (this.$store.getters.loading && window.confirm('Page updating, your changes could be lost. Refresh ?')) {
+          window.location.reload();
+        } else if (!this.$store.getters.loading) {
+          window.location.reload();
+        }
+      }
+    },
+    keyListening: function keyListening(e) {
+      this.attemptToSave(e);
+      this.attemptToRefresh(e);
+      this.clearKeys();
+      this.cmdPressed = e.keyCode === 91;
+      this.ctrlPressed = e.keyCode === 17;
+    },
+    clearKeys: function clearKeys() {
+      this.cmdPressed = false;
+      this.ctrlPressed = false;
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$el.removeEventListener('keydown', this.keyListening);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/mixins/parser.js":
 /*!***************************************!*\
   !*** ./resources/js/mixins/parser.js ***!
@@ -51832,6 +51878,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages */ "./resources/js/store/pages.js");
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -51842,8 +51890,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     loadingTimeout: 1000
   },
   getters: {
-    loading: function loading(state) {
-      return state.loading;
+    loading: function loading(state, getters) {
+      return state.loading || getters.updating;
     },
     loadingError: function loadingError(state) {
       return state.loadingError;
@@ -51859,9 +51907,140 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       state.loadingError = value;
     }
   },
-  actions: {//
+  actions: {
+    init: function init(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit,
+          dispatch = _ref.dispatch;
+      dispatch('initPages');
+    }
+  },
+  modules: {
+    namespaced: true,
+    pages: _pages__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/pages.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/pages.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    pages: [],
+    saveAll: false,
+    updating: {}
+  },
+  getters: {
+    pages: function pages(state) {
+      return state.pages;
+    },
+    saveAll: function saveAll(state) {
+      return state.saveAll;
+    },
+    updating: function updating(state) {
+      var pageUpdating = false;
+      Object.keys(state.updating).forEach(function (key) {
+        pageUpdating = pageUpdating || state.updating[key];
+
+        if (pageUpdating) {
+          return true;
+        }
+      });
+      return pageUpdating;
+    }
+  },
+  mutations: {
+    INIT_UPDATING: function INIT_UPDATING(state) {
+      state.pages.forEach(function (page) {
+        Vue.set(state.updating, page.id, false);
+      });
+    },
+    PAGE_UPDATING: function PAGE_UPDATING(state, id) {
+      Vue.set(state.updating, id, true);
+    },
+    PAGE_DONE_UPDATING: function PAGE_DONE_UPDATING(state, id) {
+      Vue.set(state.updating, id, false);
+
+      if (state.saveAll) {
+        state.saveAll = false;
+      }
+    },
+    UPDATE_PAGES: function UPDATE_PAGES(state, payload) {
+      state.pages = payload;
+    },
+    UPDATE_PAGE: function UPDATE_PAGE(state, payload) {
+      state.pages.forEach(function (index, page) {
+        if (page.id + '' === payload.id + '') {
+          Vue.set(state.pages, index, _objectSpread({}, page, {
+            body: payload.content
+          }));
+        }
+      });
+    },
+    SAVE_ALL: function SAVE_ALL(state) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      state.saveAll = value;
+    }
+  },
+  actions: {
+    getPages: function getPages(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit;
+      return new Promise(function (resolve, reject) {
+        window.axios.get("/api/v1/pages?api_token=".concat(laravel.apiToken)).then(function (response) {
+          commit('UPDATE_PAGES', response.data.data);
+          resolve();
+        })["catch"](function (error) {
+          console.log(error);
+          reject();
+        });
+      });
+    },
+    updatePage: function updatePage(_ref2, payload) {
+      var state = _ref2.state,
+          commit = _ref2.commit;
+      return new Promise(function (resolve, reject) {
+        commit('PAGE_UPDATING', payload.id);
+        window.axios.post("/api/v1/pages?api_token=".concat(laravel.apiToken), {
+          page_id: payload.id,
+          body: payload.content
+        }).then(function (response) {
+          console.log(response.data.message);
+          commit('UPDATE_PAGE', payload);
+          commit('TOGGLE_LOADING', false);
+          commit('PAGE_DONE_UPDATING', payload.id);
+          resolve();
+        })["catch"](function (error) {
+          console.log(error);
+          commit('ADD_LOADING_ERROR', error.message);
+          commit('TOGGLE_LOADING', false);
+          commit('PAGE_DONE_UPDATING', payload.id);
+          reject();
+        });
+      });
+    },
+    initPages: function initPages(_ref3) {
+      var state = _ref3.state,
+          commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
+      dispatch('getPages').then(function (response) {
+        commit('INIT_UPDATING');
+      });
+    }
+  }
+});
 
 /***/ }),
 

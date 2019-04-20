@@ -3,22 +3,22 @@
     <transition name="fade">
       <div class="hover-message" v-if="hovered" :style="{top: top + 'px', left: left + 'px'}">
         <transition name="fade" mode="out-in">
-          <span key="loader-error" v-if="!!$store.state.loadingError">Oops ! {{ $store.state.loadingError }}</span>
+          <span key="loader-error" v-if="!!$store.getters.loadingError">Oops ! {{ $store.getters.loadingError }}</span>
           <span key="loader-loaded"
-                v-else-if="!loading && !$store.state.loading && !$store.state.loadingError">All good !</span>
-          <span key="loader-loading" v-else-if="loading || $store.state.loading">Hold on...</span>
+                v-else-if="!loading && !$store.getters.loading && !$store.getters.loadingError">All good !</span>
+          <span key="loader-loading" v-else-if="loading || $store.getters.loading">Hold on...</span>
         </transition>
       </div>
     </transition>
     <div class="icon-container" @mouseout="hovered = false">
       <transition name="fade" mode="out-in">
         <div class="loader-error hoverable" key="loader-error"
-             v-if="!!$store.state.loadingError"><i class="fa fa-times"></i>
+             v-if="!!$store.getters.loadingError"><i class="fa fa-times"></i>
         </div>
         <div class="loader-loaded hoverable" key="loader-loaded"
-             v-else-if="!loading && !$store.state.loading && !$store.state.loadingError"><i
+             v-else-if="!loading && !$store.getters.loading && !$store.getters.loadingError"><i
           class="fa fa-check"></i></div>
-        <div class="loader-loading hoverable" v-else-if="loading || $store.state.loading" key="loader-loading"><i
+        <div class="loader-loading hoverable" v-else-if="loading || $store.getters.loading" key="loader-loading"><i
           class="fa fa-circle-notch"></i>
         </div>
       </transition>
