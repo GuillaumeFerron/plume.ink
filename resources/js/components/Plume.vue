@@ -20,7 +20,7 @@
       }
     },
     mounted() {
-      window.axios.get('/api/v1/pages')
+      window.axios.get(`/api/v1/pages?api_token=${laravel.apiToken}`)
         .then(response => {
           this.pages = response.data.data
         })

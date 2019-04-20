@@ -1872,7 +1872,7 @@ __webpack_require__.r(__webpack_exports__);
     updatePage: function updatePage() {
       var _this2 = this;
 
-      window.axios.post('/api/v1/pages', {
+      window.axios.post("/api/v1/pages?api_token=".concat(laravel.apiToken), {
         page_id: this.page.id,
         body: this.content
       }).then(function (response) {
@@ -1928,7 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    window.axios.get('/api/v1/pages').then(function (response) {
+    window.axios.get("/api/v1/pages?api_token=".concat(laravel.apiToken)).then(function (response) {
       _this.pages = response.data.data;
     })["catch"](function (error) {
       console.log(error);
@@ -6422,7 +6422,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 15px;\n  right: 15px;\n}\n.hover-message[data-v-e79ec684] {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.1);\n  border-radius: 4px;\n  width: 100px;\n  text-align: center;\n  vertical-align: middle;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  -webkit-transform: translate(-100%, -100%);\n  transform: translate(-100%, -100%);\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}\n.fade-enter-active[data-v-e79ec684], .fade-leave-active[data-v-e79ec684] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-e79ec684], .fade-leave-to[data-v-e79ec684] {\n  opacity: 0;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 15px;\n  right: 15px;\n}\n.hover-message[data-v-e79ec684] {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.1);\n  border-radius: 4px;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  text-align: center;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-transform: translate(-100%, -110%);\n  transform: translate(-100%, -110%);\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}\n.fade-enter-active[data-v-e79ec684], .fade-leave-active[data-v-e79ec684] {\n  transition: opacity 0.5s;\n}\n.fade-enter[data-v-e79ec684], .fade-leave-to[data-v-e79ec684] {\n  opacity: 0;\n}", ""]);
 
 // exports
 
@@ -38011,20 +38011,17 @@ var render = function() {
               },
               [
                 _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-                  _vm._v("hr\n        "),
-                  !_vm.loading &&
-                  !_vm.$store.state.loading &&
-                  !_vm.$store.state.loadingError
-                    ? _c("span", { key: "loader-loaded" }, [
-                        _vm._v("All good !")
-                      ])
-                    : !_vm.loading &&
-                      !_vm.$store.state.loading &&
-                      !!_vm.$store.state.loadingError
+                  !!_vm.$store.state.loadingError
                     ? _c("span", { key: "loader-error" }, [
                         _vm._v(
                           "Oops ! " + _vm._s(_vm.$store.state.loadingError)
                         )
+                      ])
+                    : !_vm.loading &&
+                      !_vm.$store.state.loading &&
+                      !_vm.$store.state.loadingError
+                    ? _c("span", { key: "loader-loaded" }, [
+                        _vm._v("All good !")
                       ])
                     : _vm.loading || _vm.$store.state.loading
                     ? _c("span", { key: "loader-loading" }, [
@@ -38050,20 +38047,7 @@ var render = function() {
         },
         [
           _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-            !_vm.loading &&
-            !_vm.$store.state.loading &&
-            !_vm.$store.state.loadingError
-              ? _c(
-                  "div",
-                  {
-                    key: "loader-loaded",
-                    staticClass: "loader-loaded hoverable"
-                  },
-                  [_c("i", { staticClass: "fa fa-check" })]
-                )
-              : !_vm.loading &&
-                !_vm.$store.state.loading &&
-                !!_vm.$store.state.loadingError
+            !!_vm.$store.state.loadingError
               ? _c(
                   "div",
                   {
@@ -38071,6 +38055,17 @@ var render = function() {
                     staticClass: "loader-error hoverable"
                   },
                   [_c("i", { staticClass: "fa fa-times" })]
+                )
+              : !_vm.loading &&
+                !_vm.$store.state.loading &&
+                !_vm.$store.state.loadingError
+              ? _c(
+                  "div",
+                  {
+                    key: "loader-loaded",
+                    staticClass: "loader-loaded hoverable"
+                  },
+                  [_c("i", { staticClass: "fa fa-check" })]
                 )
               : _vm.loading || _vm.$store.state.loading
               ? _c(
@@ -51390,7 +51385,7 @@ Vue.component('plume', __webpack_require__(/*! ./components/Plume.vue */ "./reso
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-if ($('#plume')) {
+if (document.getElementById('plume')) {
   var app = new Vue({
     el: '#plume',
     store: _store__WEBPACK_IMPORTED_MODULE_0__["default"]

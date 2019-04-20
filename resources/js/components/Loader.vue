@@ -2,22 +2,22 @@
   <div class="loader-container text-muted">
     <transition name="fade">
       <div class="hover-message" v-if="hovered" :style="{top: top + 'px', left: left + 'px'}">
-        <transition name="fade" mode="out-in">hr
+        <transition name="fade" mode="out-in">
+          <span key="loader-error" v-if="!!$store.state.loadingError">Oops ! {{ $store.state.loadingError }}</span>
           <span key="loader-loaded"
-                v-if="!loading && !$store.state.loading && !$store.state.loadingError">All good !</span>
-          <span key="loader-error" v-else-if="!loading && !$store.state.loading && !!$store.state.loadingError">Oops ! {{ $store.state.loadingError }}</span>
+                v-else-if="!loading && !$store.state.loading && !$store.state.loadingError">All good !</span>
           <span key="loader-loading" v-else-if="loading || $store.state.loading">Hold on...</span>
         </transition>
       </div>
     </transition>
     <div class="icon-container" @mouseout="hovered = false">
       <transition name="fade" mode="out-in">
-        <div class="loader-loaded hoverable" key="loader-loaded"
-             v-if="!loading && !$store.state.loading && !$store.state.loadingError"><i
-          class="fa fa-check"></i></div>
         <div class="loader-error hoverable" key="loader-error"
-             v-else-if="!loading && !$store.state.loading && !!$store.state.loadingError"><i class="fa fa-times"></i>
+             v-if="!!$store.state.loadingError"><i class="fa fa-times"></i>
         </div>
+        <div class="loader-loaded hoverable" key="loader-loaded"
+             v-else-if="!loading && !$store.state.loading && !$store.state.loadingError"><i
+          class="fa fa-check"></i></div>
         <div class="loader-loading hoverable" v-else-if="loading || $store.state.loading" key="loader-loading"><i
           class="fa fa-circle-notch"></i>
         </div>
@@ -67,12 +67,11 @@
     position: fixed;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    width: 100px;
+    width: fit-content;
     text-align: center;
     vertical-align: middle;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    @include transform(translate(-100%, -100%))
+    padding: 10px;
+    @include transform(translate(-100%, -110%))
   }
 
   .loader-loading {

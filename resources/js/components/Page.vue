@@ -38,7 +38,7 @@
         }, this.$store.state.loadingTimeout)
       },
       updatePage() {
-        window.axios.post('/api/v1/pages', {
+        window.axios.post(`/api/v1/pages?api_token=${laravel.apiToken}`, {
           page_id: this.page.id,
           body: this.content
         })
