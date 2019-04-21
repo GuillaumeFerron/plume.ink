@@ -13,7 +13,7 @@ export default {
       if ((this.cmdPressed || this.ctrlPressed) && e.keyCode === 83) {
         e.preventDefault()
 
-        this.$store.commit('SAVE_ALL')
+        this.$store.dispatch('updatePages', this.$store.state.pages.pages)
       }
     },
     attemptToRefresh(e) {

@@ -96,4 +96,6 @@
        'csrfToken' => csrf_token(),
        'apiToken' => \Illuminate\Support\Facades\Auth::user() ? \Illuminate\Support\Facades\Auth::user()->api_token : null,
    ]) !!}
+
+    window.maxLength = {{ intval(config('api.post_max_size') / config('api.utf8_max_char_size')) }}
 </script>

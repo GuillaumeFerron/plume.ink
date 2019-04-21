@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     loading: false,
     loadingError: '',
-    loadingTimeout: 1000
+    loadingTimeout: 1500
   },
   getters: {
     loading: (state, getters) => {
