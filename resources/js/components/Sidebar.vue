@@ -1,8 +1,11 @@
 <template>
-  <div :class="`sidebar-container ${sidebarVisible ? 'sidebar-visible' : ''}`">
-    <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"><i
-      class="fa fa-ellipsis-h"></i></div>
-  </div>
+  <transition name="fade">
+    <div :class="`sidebar-container ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
+         key="sidebar">
+      <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"><i
+        class="fa fa-ellipsis-h"></i></div>
+    </div>
+  </transition>
 </template>
 
 <script>

@@ -2,7 +2,9 @@ export default {
   state: {
     pages: '',
     saveAll: false,
-    updating: false
+    updating: false,
+    length: 0,
+    contentInit: false
   },
   getters: {
     pages: state => {
@@ -20,12 +22,15 @@ export default {
     UPDATE_PAGES(state, payload) {
       state.pages = payload
     },
-    SAVE_ALL(state, value = true) {
-      state.saveAll = value
+    UPDATE_LENGTH(state, payload) {
+      state.length = payload
+    },
+    CONTENT_INIT(state) {
+      state.contentInit = true
     }
   },
   actions: {
-    getPages({ commit }) {
+    getPages({ state, commit }) {
       commit('TOGGLE_LOADING', true)
 
       return new Promise((resolve, reject) => {
@@ -35,6 +40,13 @@ export default {
               return currentIndex === 0 ? accumulator : accumulator += currentValue.body
             }, response.data.data[0].body))
             commit('TOGGLE_LOADING', false)
+
+            if (!state.contentInit) {
+              // Leave timeout to let the store propagate the pages
+              setTimeout(() => {
+                commit('CONTENT_INIT')
+              }, 10)
+            }
 
             resolve(response)
           })
