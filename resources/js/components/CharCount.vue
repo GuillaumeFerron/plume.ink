@@ -16,7 +16,7 @@
   @import '../../sass/_variables.scss';
 
   .char-count-container {
-    position: absolute;
+    position: fixed;
     top: $page-padding;
     right: $page-padding;
   }

@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="char-count-container text-muted" v-show="$store.state.pages.length" key="char-count">
+    <div class="logo-container text-muted hoverable" v-show="$store.state.pages.length" key="logo">
       <i class="fa fa-feather"></i>
     </div>
   </transition>
@@ -15,8 +15,8 @@
 <style scoped lang="scss">
   @import '../../sass/_variables.scss';
 
-  .char-count-container {
-    position: absolute;
+  .logo-container {
+    position: fixed;
     top: $page-padding;
     left: $page-padding;
   }

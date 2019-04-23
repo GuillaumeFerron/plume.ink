@@ -6460,7 +6460,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.char-count-container[data-v-f41c6e04] {\n  position: absolute;\n  top: 15px;\n  right: 15px;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.char-count-container[data-v-f41c6e04] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n}", ""]);
 
 // exports
 
@@ -6498,7 +6498,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.char-count-container[data-v-1c796f16] {\n  position: absolute;\n  top: 15px;\n  left: 15px;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.logo-container[data-v-1c796f16] {\n  position: fixed;\n  top: 15px;\n  left: 15px;\n}", ""]);
 
 // exports
 
@@ -38317,8 +38317,8 @@ var render = function() {
             expression: "$store.state.pages.length"
           }
         ],
-        key: "char-count",
-        staticClass: "char-count-container text-muted"
+        key: "logo",
+        staticClass: "logo-container text-muted hoverable"
       },
       [_c("i", { staticClass: "fa fa-feather" })]
     )
