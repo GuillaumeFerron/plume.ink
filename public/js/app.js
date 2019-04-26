@@ -1992,6 +1992,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
   data: function data() {
@@ -38430,9 +38454,58 @@ var render = function() {
         ],
         key: "sidebar",
         class:
-          "sidebar-container " + (_vm.sidebarVisible ? "sidebar-visible" : "")
+          "sidebar-container px-3 " +
+          (_vm.sidebarVisible ? "sidebar-visible" : "")
       },
       [
+        _c("div", { staticClass: "setting row m-0" }, [
+          _c("span", [_vm._v("Font Family")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml-auto" }, [
+            _vm._v(_vm._s(_vm.$store.state.settings.settings["font-family"]))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "setting row m-0" }, [
+          _c("span", [_vm._v("Font Size")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml-auto" }, [
+            _vm._v(_vm._s(_vm.$store.state.settings.settings["font-size"]))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "setting row m-0" }, [
+          _c("span", [_vm._v("Color Mode")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml-auto" }, [
+            _vm._v(_vm._s(_vm.$store.state.settings.settings["color-mode"]))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "setting row m-0" }, [
+          _c("span", [_vm._v("Primary Color")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml-auto" }, [
+            _vm._v(_vm._s(_vm.$store.state.settings.settings["primary-color"]))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "setting row m-0" }, [
+          _c("span", [_vm._v("Characters Count")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml-auto" }, [
+            _vm._v(_vm._s(_vm.$store.state.settings.settings["char-count"]))
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "setting row m-0" }, [
+          _c("span", [_vm._v("Autosave")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "ml-auto" }, [
+            _vm._v(_vm._s(_vm.$store.state.settings.settings["autosave"]))
+          ])
+        ]),
+        _vm._v(" "),
         _c(
           "div",
           {

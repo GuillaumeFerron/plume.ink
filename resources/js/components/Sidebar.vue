@@ -1,7 +1,31 @@
 <template>
   <transition name="fade">
-    <div :class="`sidebar-container ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
+    <div :class="`sidebar-container px-3 ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
          key="sidebar">
+      <div class="setting row m-0">
+        <span>Font Family</span>
+        <span class="ml-auto">{{ $store.state.settings.settings['font-family'] }}</span>
+      </div>
+      <div class="setting row m-0">
+        <span>Font Size</span>
+        <span class="ml-auto">{{ $store.state.settings.settings['font-size'] }}</span>
+      </div>
+      <div class="setting row m-0">
+        <span>Color Mode</span>
+        <span class="ml-auto">{{ $store.state.settings.settings['color-mode'] }}</span>
+      </div>
+      <div class="setting row m-0">
+        <span>Primary Color</span>
+        <span class="ml-auto">{{ $store.state.settings.settings['primary-color'] }}</span>
+      </div>
+      <div class="setting row m-0">
+        <span>Characters Count</span>
+        <span class="ml-auto">{{ $store.state.settings.settings['char-count'] }}</span>
+      </div>
+      <div class="setting row m-0">
+        <span>Autosave</span>
+        <span class="ml-auto">{{ $store.state.settings.settings['autosave'] }}</span>
+      </div>
       <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"><i
         class="fa fa-ellipsis-h"></i></div>
     </div>
