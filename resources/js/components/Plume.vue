@@ -50,9 +50,16 @@
 </script>
 
 <style scoped lang="scss">
+  @import '../../sass/_variables.scss';
+
+  .plume-container {
+    padding-top: 50px;
+    padding-bottom: 50vh;
+  }
+
   #page-editable {
     max-width: 800px;
-    width: 100vw;
+    width: calc(100vw - 2 * #{$page-padding} - 50px);
     min-height: 80vh;
     margin-left: auto;
     margin-right: auto;

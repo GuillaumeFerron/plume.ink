@@ -25,7 +25,7 @@
 
   .sidebar-container {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: $sidebar-width;
     height: 100vh;
@@ -49,7 +49,7 @@
 
     .sidebar-toggle {
       position: absolute;
-      bottom: 10px;
+      bottom: $page-padding;
       right: 0;
       -webkit-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
       -moz-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);

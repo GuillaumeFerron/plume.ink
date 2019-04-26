@@ -6517,7 +6517,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#page-editable[data-v-70368d76] {\n  max-width: 800px;\n  width: 100vw;\n  min-height: 80vh;\n  margin-left: auto;\n  margin-right: auto;\n}\n#page-editable[data-v-70368d76]:focus {\n  outline: none;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.plume-container[data-v-70368d76] {\n  padding-top: 50px;\n  padding-bottom: 50vh;\n}\n#page-editable[data-v-70368d76] {\n  max-width: 800px;\n  width: calc(100vw - 2 * 15px - 50px);\n  min-height: 80vh;\n  margin-left: auto;\n  margin-right: auto;\n}\n#page-editable[data-v-70368d76]:focus {\n  outline: none;\n}", ""]);
 
 // exports
 
@@ -6536,7 +6536,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100vh;\n  z-index: 99;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  background-color: #fff;\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 10px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100vh;\n  z-index: 99;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  background-color: #fff;\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n}", ""]);
 
 // exports
 
