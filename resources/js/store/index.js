@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import pages from './pages'
 import settings from './settings'
+import user from './user'
 
 Vue.use(Vuex)
 
@@ -29,11 +30,13 @@ export default new Vuex.Store({
     init({ state, commit, dispatch }) {
       dispatch('initPages')
       dispatch('initSettings')
+      dispatch('initUser')
     }
   },
   modules: {
     namespaced: true,
     pages: pages,
-    settings: settings
+    settings: settings,
+    user: user
   }
 })

@@ -2016,6 +2016,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
   data: function data() {
@@ -6560,7 +6570,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100vh;\n  z-index: 99;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  background-color: #fff;\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100vh;\n  z-index: 99;\n  color: #555;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  background-color: #fff;\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n}", ""]);
 
 // exports
 
@@ -38454,57 +38464,75 @@ var render = function() {
         ],
         key: "sidebar",
         class:
-          "sidebar-container px-3 " +
+          "sidebar-container p-3 " +
           (_vm.sidebarVisible ? "sidebar-visible" : "")
       },
       [
-        _c("div", { staticClass: "setting row m-0" }, [
-          _c("span", [_vm._v("Font Family")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml-auto" }, [
-            _vm._v(_vm._s(_vm.$store.state.settings.settings["font-family"]))
+        _c("div", { staticClass: "account" }, [
+          _c("div", { staticClass: "setting row m-0" }, [
+            _c("i", { staticClass: "fa fa-user" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(_vm._s(_vm.$store.getters.username))
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "setting row m-0" }, [
-          _c("span", [_vm._v("Font Size")]),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "settings" }, [
+          _c("div", { staticClass: "setting row m-0" }, [
+            _c("span", [_vm._v("Font Family")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(_vm._s(_vm.$store.state.settings.settings["font-family"]))
+            ])
+          ]),
           _vm._v(" "),
-          _c("span", { staticClass: "ml-auto" }, [
-            _vm._v(_vm._s(_vm.$store.state.settings.settings["font-size"]))
+          _c("div", { staticClass: "setting row m-0 mt-2" }, [
+            _c("span", [_vm._v("Font Size")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(_vm._s(_vm.$store.state.settings.settings["font-size"]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting row m-0 mt-2" }, [
+            _c("span", [_vm._v("Color Mode")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(_vm._s(_vm.$store.state.settings.settings["color-mode"]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting row m-0 mt-2" }, [
+            _c("span", [_vm._v("Primary Color")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(
+                _vm._s(_vm.$store.state.settings.settings["primary-color"])
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting row m-0 mt-2" }, [
+            _c("span", [_vm._v("Characters Count")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(_vm._s(_vm.$store.state.settings.settings["char-count"]))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting row m-0 mt-2" }, [
+            _c("span", [_vm._v("Autosave")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ml-auto" }, [
+              _vm._v(_vm._s(_vm.$store.state.settings.settings["autosave"]))
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "setting row m-0" }, [
-          _c("span", [_vm._v("Color Mode")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml-auto" }, [
-            _vm._v(_vm._s(_vm.$store.state.settings.settings["color-mode"]))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "setting row m-0" }, [
-          _c("span", [_vm._v("Primary Color")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml-auto" }, [
-            _vm._v(_vm._s(_vm.$store.state.settings.settings["primary-color"]))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "setting row m-0" }, [
-          _c("span", [_vm._v("Characters Count")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml-auto" }, [
-            _vm._v(_vm._s(_vm.$store.state.settings.settings["char-count"]))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "setting row m-0" }, [
-          _c("span", [_vm._v("Autosave")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "ml-auto" }, [
-            _vm._v(_vm._s(_vm.$store.state.settings.settings["autosave"]))
-          ])
-        ]),
+        _c("hr"),
         _vm._v(" "),
         _c(
           "div",
@@ -52392,6 +52420,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages */ "./resources/js/store/pages.js");
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./settings */ "./resources/js/store/settings.js");
+/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user */ "./resources/js/store/user.js");
+
 
 
 
@@ -52428,12 +52458,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           dispatch = _ref.dispatch;
       dispatch('initPages');
       dispatch('initSettings');
+      dispatch('initUser');
     }
   },
   modules: {
     namespaced: true,
     pages: _pages__WEBPACK_IMPORTED_MODULE_2__["default"],
-    settings: _settings__WEBPACK_IMPORTED_MODULE_3__["default"]
+    settings: _settings__WEBPACK_IMPORTED_MODULE_3__["default"],
+    user: _user__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 }));
 
@@ -52597,6 +52629,40 @@ __webpack_require__.r(__webpack_exports__);
           reject(error);
         });
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/user.js":
+/*!************************************!*\
+  !*** ./resources/js/store/user.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    user: {}
+  },
+  getters: {
+    username: function username(state) {
+      return state.user.name;
+    }
+  },
+  mutations: {
+    UPDATE_USER: function UPDATE_USER(state, payload) {
+      state.user = payload;
+    }
+  },
+  actions: {
+    initUser: function initUser(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit;
+      commit('UPDATE_USER', user);
     }
   }
 });

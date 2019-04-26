@@ -1,31 +1,41 @@
 <template>
   <transition name="fade">
-    <div :class="`sidebar-container px-3 ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
+    <div :class="`sidebar-container p-3 ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
          key="sidebar">
-      <div class="setting row m-0">
-        <span>Font Family</span>
-        <span class="ml-auto">{{ $store.state.settings.settings['font-family'] }}</span>
+      <div class="account">
+        <div class="setting row m-0">
+          <i class="fa fa-user"></i>
+          <span class="ml-auto">{{ $store.getters.username }}</span>
+        </div>
       </div>
-      <div class="setting row m-0">
-        <span>Font Size</span>
-        <span class="ml-auto">{{ $store.state.settings.settings['font-size'] }}</span>
+      <hr>
+      <div class="settings">
+        <div class="setting row m-0">
+          <span>Font Family</span>
+          <span class="ml-auto">{{ $store.state.settings.settings['font-family'] }}</span>
+        </div>
+        <div class="setting row m-0 mt-2">
+          <span>Font Size</span>
+          <span class="ml-auto">{{ $store.state.settings.settings['font-size'] }}</span>
+        </div>
+        <div class="setting row m-0 mt-2">
+          <span>Color Mode</span>
+          <span class="ml-auto">{{ $store.state.settings.settings['color-mode'] }}</span>
+        </div>
+        <div class="setting row m-0 mt-2">
+          <span>Primary Color</span>
+          <span class="ml-auto">{{ $store.state.settings.settings['primary-color'] }}</span>
+        </div>
+        <div class="setting row m-0 mt-2">
+          <span>Characters Count</span>
+          <span class="ml-auto">{{ $store.state.settings.settings['char-count'] }}</span>
+        </div>
+        <div class="setting row m-0 mt-2">
+          <span>Autosave</span>
+          <span class="ml-auto">{{ $store.state.settings.settings['autosave'] }}</span>
+        </div>
       </div>
-      <div class="setting row m-0">
-        <span>Color Mode</span>
-        <span class="ml-auto">{{ $store.state.settings.settings['color-mode'] }}</span>
-      </div>
-      <div class="setting row m-0">
-        <span>Primary Color</span>
-        <span class="ml-auto">{{ $store.state.settings.settings['primary-color'] }}</span>
-      </div>
-      <div class="setting row m-0">
-        <span>Characters Count</span>
-        <span class="ml-auto">{{ $store.state.settings.settings['char-count'] }}</span>
-      </div>
-      <div class="setting row m-0">
-        <span>Autosave</span>
-        <span class="ml-auto">{{ $store.state.settings.settings['autosave'] }}</span>
-      </div>
+      <hr>
       <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"><i
         class="fa fa-ellipsis-h"></i></div>
     </div>
@@ -54,6 +64,7 @@
     width: $sidebar-width;
     height: 100vh;
     z-index: 99;
+    color: #555;
     @include transition();
     -webkit-transform: translate(-100%, 0);
     -moz-transform: translate(-100%, 0);

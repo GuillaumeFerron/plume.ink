@@ -98,4 +98,6 @@
    ]) !!}
 
     window.maxLength = {{ intval(config('api.post_max_size') / config('api.utf8_max_char_size')) }}
+
+    window.user = {!! Illuminate\Support\Facades\Auth::user() !!}
 </script>
