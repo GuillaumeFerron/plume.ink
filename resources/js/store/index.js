@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import pages from './pages'
+import settings from './settings'
 
 Vue.use(Vuex)
 
@@ -27,10 +28,12 @@ export default new Vuex.Store({
   actions: {
     init({ state, commit, dispatch }) {
       dispatch('initPages')
+      dispatch('initSettings')
     }
   },
   modules: {
     namespaced: true,
-    pages: pages
+    pages: pages,
+    settings: settings
   }
 })

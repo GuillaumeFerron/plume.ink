@@ -52318,6 +52318,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages */ "./resources/js/store/pages.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./settings */ "./resources/js/store/settings.js");
+
 
 
 
@@ -52352,11 +52354,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           commit = _ref.commit,
           dispatch = _ref.dispatch;
       dispatch('initPages');
+      dispatch('initSettings');
     }
   },
   modules: {
     namespaced: true,
-    pages: _pages__WEBPACK_IMPORTED_MODULE_2__["default"]
+    pages: _pages__WEBPACK_IMPORTED_MODULE_2__["default"],
+    settings: _settings__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
 
@@ -52481,6 +52485,45 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref4.commit,
           dispatch = _ref4.dispatch;
       dispatch('getPages');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/settings.js":
+/*!****************************************!*\
+  !*** ./resources/js/store/settings.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    settings: {}
+  },
+  getters: {},
+  mutations: {
+    UPDATE_SETTINGS: function UPDATE_SETTINGS(state, payload) {
+      state.settings = payload;
+    }
+  },
+  actions: {
+    initSettings: function initSettings(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit;
+      return new Promise(function (resolve, reject) {
+        window.axios.get("/api/v1/settings?api_token=".concat(laravel.apiToken)).then(function (response) {
+          commit('TOGGLE_LOADING', false);
+          commit('UPDATE_SETTINGS', response.data.data);
+          resolve(response);
+        })["catch"](function (error) {
+          console.log(error);
+          reject(error);
+        });
+      });
     }
   }
 });

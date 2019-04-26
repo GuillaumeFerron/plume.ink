@@ -21,6 +21,13 @@ Route::group([
     'prefix' => config('api.version'),
     'middleware' => ['auth']
 ], function () {
+
+    // PAGES //
     Route::get('/pages', 'PageController@index');
     Route::post('/pages', 'PageController@edit');
+
+    // SETTINGS //
+    Route::get('/settings', 'SettingController@index');
+    Route::get('/setting', 'SettingController@get');
+    Route::post('/setting', 'SettingController@update');
 });

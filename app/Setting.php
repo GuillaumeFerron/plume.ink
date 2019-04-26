@@ -28,4 +28,45 @@ class Setting extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Returns the setting value given the key
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function getValueByKey($key)
+    {
+        $setting = $this->app;
+
+        return json_decode(optional($setting))->{$key};
+    }
+
+    /**
+     * Set value given the key
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function setValue($key, $value)
+    {
+        $setting = json_decode($this->app);
+        $setting->{$key} = $value;
+
+        $this->update([
+            'app' => $setting
+        ]);
+
+        return $setting->{$key};
+    }
+
+    /**
+     * Returns the object as an array
+     *
+     * @return mixed
+     */
+    public function getSettings()
+    {
+        return json_decode($this->app);
+    }
 }
