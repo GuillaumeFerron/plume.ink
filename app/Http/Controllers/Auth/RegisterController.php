@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Setting;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -64,11 +67,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'api_token' => Str::random(config('api.token_length'))
         ]);
+
+        $setting = Setting::create([
+            'user_id' => $user->id,
+            'app' => json_encode(Setting::default_settings)
+        ]);
+
+        $user->update([
+            'setting_id' => $setting->id
+        ]);
+
+        return $user;
     }
 }

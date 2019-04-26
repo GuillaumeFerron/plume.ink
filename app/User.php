@@ -19,6 +19,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token',
+        'setting_id'
     ];
 
     /**
@@ -48,5 +50,15 @@ class User extends Authenticatable
     public function pages()
     {
         return $this->hasMany(Page::class);
+    }
+
+    /**
+     * Setting relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function setting()
+    {
+        return $this->hasOne(Setting::class);
     }
 }
