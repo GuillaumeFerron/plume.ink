@@ -62,7 +62,7 @@
     bottom: 0;
     left: 0;
     width: $sidebar-width;
-    height: 100vh;
+    height: 100%;
     z-index: 99;
     color: #555;
     @include transition();
