@@ -63,7 +63,7 @@
 
     .sidebar-toggle {
       position: absolute;
-      bottom: $page-padding;
+      top: $page-padding;
       right: 0;
       -webkit-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
       -moz-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);

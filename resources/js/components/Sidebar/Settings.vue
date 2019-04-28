@@ -77,12 +77,17 @@
     },
     methods: {
       updateSetting(key, value) {
+        const initialValue = this.$store.state.settings.settings[key]
+
         window.axios.post(`/api/v1/setting?api_token=${laravel.apiToken}`, {
           key: key,
           value: value
         })
           .then((response) => {
             this.$store.commit('UPDATE_SETTINGS', response.data.data)
+          })
+          .catch(error => {
+            this.$store.commit('UPDATE_SETTINGS', initialValue)
           })
       },
       toggleDarkMode(key) {

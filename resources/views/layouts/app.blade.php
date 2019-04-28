@@ -91,15 +91,17 @@
 </body>
 </html>
 
-<script>
-  window.laravel = {!! json_encode([
+@auth
+    <script>
+      window.laravel = {!! json_encode([
        'csrfToken' => csrf_token(),
        'apiToken' => \Illuminate\Support\Facades\Auth::user() ? \Illuminate\Support\Facades\Auth::user()->api_token : null,
    ]) !!}
 
-    window.maxLength = {{ intval(config('api.post_max_size') / config('api.utf8_max_char_size')) }}
+        window.maxLength = {{ intval(config('api.post_max_size') / config('api.utf8_max_char_size')) }}
 
-    window.user = {!! Illuminate\Support\Facades\Auth::user() !!}
+        window.user = {!! Illuminate\Support\Facades\Auth::user() !!}
 
-    window.settings = {!! json_encode(\App\Setting::getAllPossibleSettings()) !!}
-</script>
+        window.settings = {!! json_encode(\App\Setting::getAllPossibleSettings()) !!}
+    </script>
+@endauth

@@ -4,7 +4,8 @@ export default {
     saveAll: false,
     updating: false,
     length: 0,
-    contentInit: false
+    contentInit: false,
+    modified: false
   },
   getters: {
     pages: state => {
@@ -27,6 +28,9 @@ export default {
     },
     CONTENT_INIT(state) {
       state.contentInit = true
+    },
+    CONTENT_MODIFIED(state, value = true) {
+      state.modified = value
     }
   },
   actions: {
@@ -61,6 +65,7 @@ export default {
           .then((response) => {
             console.log(response.data.message)
             commit('PAGE_DONE_UPDATING')
+            commit('CONTENT_MODIFIED', false)
 
             resolve(response)
           })
@@ -68,6 +73,7 @@ export default {
             console.log(error)
             commit('ADD_LOADING_ERROR', error.message)
             commit('PAGE_DONE_UPDATING')
+            commit('CONTENT_MODIFIED', false)
 
             reject(error)
           })

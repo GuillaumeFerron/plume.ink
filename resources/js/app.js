@@ -11,12 +11,10 @@ window.Vue = require('vue')
 
 import store from './store'
 
-store.dispatch('init')
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-Vue.mixin(settingsManagement)
-Vue.component('plume', require('./components/Plume.vue').default)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -25,6 +23,11 @@ Vue.component('plume', require('./components/Plume.vue').default)
  */
 
 if (document.getElementById('plume')) {
+  Vue.mixin(settingsManagement)
+  Vue.component('plume', require('./components/Plume.vue').default)
+
+  store.dispatch('init')
+
   const app = new Vue({
     el: '#plume',
     store
