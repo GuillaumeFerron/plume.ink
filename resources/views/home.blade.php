@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" id="plume">
+    <div id="plume">
         <plume></plume>
     </div>
 @endsection

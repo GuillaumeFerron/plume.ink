@@ -10690,7 +10690,9 @@ a.text-dark:focus {
   left: -99999999px;
 }
 
-* {
+.sidebar-container,
+.loader-container,
+.char-count-container {
   font-family: monospace;
 }
 
@@ -10734,6 +10736,11 @@ textarea,
 
 .clickable:hover {
   cursor: pointer;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #f4b400;
+  border-color: #f4b400;
 }
 
 /**

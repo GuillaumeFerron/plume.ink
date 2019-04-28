@@ -47,10 +47,10 @@ class SettingController extends Controller
     public function update()
     {
         try {
-            $new_value = Auth::user()->setting->setValue(Input::get('key'), Input::get('value'));
+            $new_settings = Auth::user()->setting->setValue(Input::get('key'), Input::get('value'));
 
             return response([
-                'data' => $new_value,
+                'data' => $new_settings,
                 'message' => 'Success saving the setting.'
             ], 200);
         } catch (\Exception $e) {

@@ -1,6 +1,7 @@
 <template>
   <transition name="fade">
-    <div class="char-count-container text-muted" v-show="$store.state.pages.length">
+    <div class="char-count-container text-muted" v-show="$store.state.pages.length"
+         :style="{color: `${getFontColor} !important`}">
       {{ $store.state.pages.length }} characters
     </div>
   </transition>
@@ -19,5 +20,10 @@
     position: fixed;
     top: $page-padding;
     right: $page-padding;
+    -webkit-transition: color $default-transition-time;
+    -moz-transition: color $default-transition-time;
+    -ms-transition: color $default-transition-time;
+    -o-transition: color $default-transition-time;
+    transition: color $default-transition-time;
   }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <transition name="fade">
     <div :class="`sidebar-container p-3 ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
+         :style="{backgroundColor: `${getBackgroundColor} !important`}"
          key="sidebar">
       <div class="account">
         <div class="setting row m-0">
@@ -11,32 +12,62 @@
       <hr>
       <div class="settings">
         <div class="setting row m-0">
-          <span>Font Family</span>
-          <span class="ml-auto">{{ $store.state.settings.settings['font-family'] }}</span>
+          <span class="font-weight-bold mb-2">Font Family</span>
+          <div class="col-12"
+               v-for="(fontFamily, index) in settings['font-families']">
+            <input type="radio" :id="`family-${index}`" name="font-family"
+                   :checked="$store.state.settings.settings['font-family'] === fontFamily"
+                   @click="updateSetting('font-family', fontFamily)">
+            <label :for="`family-${index}`" :style="{fontFamily: `${fontFamily} !important`}">{{ fontFamily }}</label>
+          </div>
+        </div>
+        <div class="setting row m-0">
+          <span class="font-weight-bold mb-2">Font Size</span>
+          <div class="col-12"
+               v-for="(fontSize, index) in settings['font-sizes']">
+            <input type="radio" :id="`size-${index}`" name="font-size"
+                   :checked="$store.state.settings.settings['font-size'] === fontSize"
+                   @click="updateSetting('font-size', fontSize)">
+            <label :for="`size-${index}`"
+                   :style="{fontSize: `${fontSize === 'small' ? '10px' : fontSize === 'large' ? '16px' : '13px'} !important`}">{{
+              fontSize }}</label>
+          </div>
         </div>
         <div class="setting row m-0 mt-2">
-          <span>Font Size</span>
-          <span class="ml-auto">{{ $store.state.settings.settings['font-size'] }}</span>
+          <span class="font-weight-bold">Dark Mode</span>
+          <div class="custom-control custom-switch ml-auto">
+            <input type="checkbox" class="custom-control-input" id="color-mode-switch"
+                   :checked="$store.state.settings.settings['color-mode'] === 'dark'"
+                   @change="toggleDarkMode('color-mode')">
+            <label class="custom-control-label" for="color-mode-switch"></label>
+          </div>
         </div>
         <div class="setting row m-0 mt-2">
-          <span>Color Mode</span>
-          <span class="ml-auto">{{ $store.state.settings.settings['color-mode'] }}</span>
-        </div>
-        <div class="setting row m-0 mt-2">
-          <span>Primary Color</span>
+          <span class="font-weight-bold">Primary Color</span>
           <span class="ml-auto">{{ $store.state.settings.settings['primary-color'] }}</span>
         </div>
         <div class="setting row m-0 mt-2">
-          <span>Characters Count</span>
-          <span class="ml-auto">{{ $store.state.settings.settings['char-count'] }}</span>
+          <span class="font-weight-bold">Characters Count</span>
+          <div class="custom-control custom-switch ml-auto">
+            <input type="checkbox" class="custom-control-input" id="char-count-switch"
+                   :checked="$store.state.settings.settings['char-count'] === '1'"
+                   @change="toggleSetting('char-count')">
+            <label class="custom-control-label" for="char-count-switch"></label>
+          </div>
         </div>
         <div class="setting row m-0 mt-2">
-          <span>Autosave</span>
-          <span class="ml-auto">{{ $store.state.settings.settings['autosave'] }}</span>
+          <span class="font-weight-bold">Autosave</span>
+          <div class="custom-control custom-switch ml-auto">
+            <input type="checkbox" class="custom-control-input" id="autosave-switch"
+                   :checked="$store.state.settings.settings['autosave'] === '1'"
+                   @change="toggleSetting('autosave')">
+            <label class="custom-control-label" for="autosave-switch"></label>
+          </div>
         </div>
       </div>
       <hr>
-      <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"><i
+      <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"
+           :style="{color: `${getFontColor} !important`}"><i
         class="fa fa-ellipsis-h"></i></div>
     </div>
   </transition>
@@ -49,6 +80,28 @@
       return {
         sidebarVisible: false
       }
+    },
+    computed: {
+      settings() {
+        return window.settings
+      }
+    },
+    methods: {
+      updateSetting(key, value) {
+        window.axios.post(`/api/v1/setting?api_token=${laravel.apiToken}`, {
+          key: key,
+          value: value
+        })
+          .then((response) => {
+            this.$store.commit('UPDATE_SETTINGS', response.data.data)
+          })
+      },
+      toggleDarkMode(key) {
+        this.updateSetting(key, $(`#${key}-switch`)[0].checked ? 'dark' : 'white')
+      },
+      toggleSetting(key) {
+        this.updateSetting(key, $(`#${key}-switch`)[0].checked ? '1' : '0')
+      }
     }
   }
 </script>
@@ -59,19 +112,22 @@
 
   .sidebar-container {
     position: fixed;
+    font-size: 13px;
     bottom: 0;
     left: 0;
     width: $sidebar-width;
     height: 100%;
     z-index: 99;
-    color: #555;
-    @include transition();
+    -webkit-transition: all $default-transition-time;
+    -moz-transition: all $default-transition-time;
+    -ms-transition: all $default-transition-time;
+    -o-transition: all $default-transition-time;
+    transition: all $default-transition-time;
     -webkit-transform: translate(-100%, 0);
     -moz-transform: translate(-100%, 0);
     -ms-transform: translate(-100%, 0);
     -o-transform: translate(-100%, 0);
     transform: translate(-100%, 0);
-    background-color: #fff;
     border-right: solid 1px lightgrey;
 
     &.sidebar-visible {
@@ -91,6 +147,11 @@
       -ms-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
       -o-transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
       transform: translate3d(calc(100% + #{$page-padding}), 0, 0);
+      -webkit-transition: color $default-transition-time;
+      -moz-transition: color $default-transition-time;
+      -ms-transition: color $default-transition-time;
+      -o-transition: color $default-transition-time;
+      transition: color $default-transition-time;
     }
   }
 </style>

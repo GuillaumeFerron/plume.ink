@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Setting extends Model
 {
@@ -18,6 +19,30 @@ class Setting extends Model
     protected $fillable = ['user_id', 'app'];
 
     public $timestamps = false;
+
+    public const font_families = [
+        'monospace',
+        'sans-serif',
+        'serif'
+    ];
+
+    public const font_sizes = [
+        'small',
+        'regular',
+        'large'
+    ];
+
+    public const color_modes = [
+        'white',
+        'dark'
+    ];
+
+    public const primary_colors = [
+        'default',
+        'blue',
+        'red',
+        'green'
+    ];
 
     /**
      * Setting relationship
@@ -54,10 +79,10 @@ class Setting extends Model
         $setting->{$key} = $value;
 
         $this->update([
-            'app' => $setting
+            'app' => json_encode($setting)
         ]);
 
-        return $setting->{$key};
+        return $setting;
     }
 
     /**
@@ -68,5 +93,18 @@ class Setting extends Model
     public function getSettings()
     {
         return json_decode($this->app);
+    }
+
+    /**
+     * Get the different selectable setting values
+     */
+    public static function getAllPossibleSettings()
+    {
+        return [
+            'font-families' => self::font_families,
+            'font-sizes' => self::font_sizes,
+            'color-modes' => self::color_modes,
+            'primary-colors' => self::primary_colors
+        ];
     }
 }

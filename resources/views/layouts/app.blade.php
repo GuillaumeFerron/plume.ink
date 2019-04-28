@@ -76,7 +76,7 @@
     {{--            </div>--}}
     {{--        </nav>--}}
 
-    <main class="py-4">
+    <main>
         <div class="row m-0">
             @if(Route::current()->getName() === 'login')
                 <a class="btn btn-outline-secondary ml-auto mr-3"
@@ -100,4 +100,6 @@
     window.maxLength = {{ intval(config('api.post_max_size') / config('api.utf8_max_char_size')) }}
 
     window.user = {!! Illuminate\Support\Facades\Auth::user() !!}
+
+    window.settings = {!! json_encode(\App\Setting::getAllPossibleSettings()) !!}
 </script>

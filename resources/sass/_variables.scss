@@ -17,6 +17,11 @@ $sidebar-width: 250px;
 
 $page-padding: 15px;
 
+$color-dark: #303437;
+$color-white: #eeeeee;
+
+$default-transition-time: 0.2s;
+
 $grid-breakpoints: () !default;
 $grid-breakpoints: map-merge(
                 (

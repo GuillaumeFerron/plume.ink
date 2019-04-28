@@ -1771,6 +1771,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CharCount'
 });
@@ -1786,6 +1787,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -1862,6 +1864,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Logo'
 });
@@ -1927,6 +1930,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1946,7 +1956,7 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_parser__WEBPACK_IMPORTED_MODULE_4__["default"]],
   data: function data() {
     return {
-      timeout: ''
+      out: ''
     };
   },
   methods: {
@@ -1957,11 +1967,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$store.commit('UPDATE_LENGTH', this.$el.querySelector('#page-editable').innerText.length);
-      this.$store.commit('TOGGLE_LOADING', true);
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(function () {
-        _this.$store.dispatch('updatePages', _this.$el.querySelector('#page-editable').innerHTML);
-      }, this.$store.state.loadingTimeout);
+
+      if (this.$store.state.settings.settings['autosave'] === '1') {
+        this.$store.commit('TOGGLE_LOADING', true);
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(function () {
+          _this.$store.dispatch('updatePages', _this.$el.querySelector('#page-editable').innerHTML);
+        }, this.$store.state.loadingTimeout);
+      }
     }
   },
   watch: {
@@ -2026,12 +2039,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
   data: function data() {
     return {
       sidebarVisible: false
     };
+  },
+  computed: {
+    settings: function settings() {
+      return window.settings;
+    }
+  },
+  methods: {
+    updateSetting: function updateSetting(key, value) {
+      var _this = this;
+
+      window.axios.post("/api/v1/setting?api_token=".concat(laravel.apiToken), {
+        key: key,
+        value: value
+      }).then(function (response) {
+        _this.$store.commit('UPDATE_SETTINGS', response.data.data);
+      });
+    },
+    toggleDarkMode: function toggleDarkMode(key) {
+      this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? 'dark' : 'white');
+    },
+    toggleSetting: function toggleSetting(key) {
+      this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? '1' : '0');
+    }
   }
 });
 
@@ -6494,7 +6561,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.char-count-container[data-v-f41c6e04] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.char-count-container[data-v-f41c6e04] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n  transition: color 0.2s;\n}", ""]);
 
 // exports
 
@@ -6532,7 +6599,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.logo-container[data-v-1c796f16] {\n  position: fixed;\n  top: 15px;\n  left: 15px;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.logo-container[data-v-1c796f16] {\n  position: fixed;\n  top: 15px;\n  left: 15px;\n}\n.logo-container i[data-v-1c796f16] {\n  transition: color 0.2s;\n}", ""]);
 
 // exports
 
@@ -6551,7 +6618,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.plume-container[data-v-70368d76] {\n  padding-top: 50px;\n  padding-bottom: 50vh;\n}\n#page-editable[data-v-70368d76] {\n  max-width: 800px;\n  width: calc(100vw - 2 * 15px - 50px);\n  min-height: 80vh;\n  margin-left: auto;\n  margin-right: auto;\n}\n#page-editable[data-v-70368d76]:focus {\n  outline: none;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.plume[data-v-70368d76] {\n  transition: background-color 0.2s, color 0.2s;\n}\n.plume-container[data-v-70368d76] {\n  padding-top: 50px;\n  padding-bottom: 50vh;\n}\n#page-editable[data-v-70368d76] {\n  max-width: 800px;\n  width: calc(100vw - 2 * 15px - 50px);\n  min-height: 80vh;\n  margin-left: auto;\n  margin-right: auto;\n}\n#page-editable[data-v-70368d76]:focus {\n  outline: none;\n}", ""]);
 
 // exports
 
@@ -6570,7 +6637,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  z-index: 99;\n  color: #555;\n  -ie-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  background-color: #fff;\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  font-size: 13px;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  z-index: 99;\n  transition: all 0.2s;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n  transition: color 0.2s;\n}", ""]);
 
 // exports
 
@@ -38179,7 +38246,8 @@ var render = function() {
             expression: "$store.state.pages.length"
           }
         ],
-        staticClass: "char-count-container text-muted"
+        staticClass: "char-count-container text-muted",
+        style: { color: _vm.getFontColor + " !important" }
       },
       [
         _vm._v(
@@ -38224,7 +38292,8 @@ var render = function() {
           }
         ],
         key: "loader",
-        staticClass: "loader-container text-muted"
+        staticClass: "loader-container text-muted",
+        style: { color: _vm.getFontColor + " !important" }
       },
       [
         _c("transition", { attrs: { name: "fade" } }, [
@@ -38352,7 +38421,8 @@ var render = function() {
           }
         ],
         key: "logo",
-        staticClass: "logo-container text-muted hoverable"
+        staticClass: "logo-container text-muted hoverable",
+        style: { color: _vm.getFontColor + " !important" }
       },
       [_c("i", { staticClass: "fa fa-feather" })]
     )
@@ -38409,23 +38479,50 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "plume-container" },
+    {
+      staticClass: "w-100 plume",
+      style: {
+        color: _vm.getFontColor + " !important",
+        backgroundColor: _vm.getBackgroundColor + " !important"
+      }
+    },
     [
-      _c("logo"),
-      _vm._v(" "),
-      _c("sidebar"),
-      _vm._v(" "),
-      _c("div", {
-        attrs: { contenteditable: "true", id: "page-editable" },
-        domProps: { innerHTML: _vm.$store.state.pages.pages },
-        on: { input: _vm.pageChange }
-      }),
-      _vm._v(" "),
-      _c("char-count"),
-      _vm._v(" "),
-      _c("loader", { attrs: { loading: false } })
-    ],
-    1
+      _c(
+        "div",
+        { staticClass: "plume-container" },
+        [
+          _c("logo"),
+          _vm._v(" "),
+          _c("sidebar"),
+          _vm._v(" "),
+          _c("div", {
+            style: {
+              fontSize: _vm.getFontSize + " !important",
+              fontFamily:
+                _vm.$store.state.settings.settings["font-family"] +
+                " !important"
+            },
+            attrs: { contenteditable: "true", id: "page-editable" },
+            domProps: { innerHTML: _vm.$store.state.pages.pages },
+            on: { input: _vm.pageChange }
+          }),
+          _vm._v(" "),
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.$store.state.settings.settings["char-count"] === "1"
+                ? _c("char-count")
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("loader", { attrs: { loading: false } })
+        ],
+        1
+      )
+    ]
   )
 }
 var staticRenderFns = []
@@ -38465,7 +38562,8 @@ var render = function() {
         key: "sidebar",
         class:
           "sidebar-container p-3 " +
-          (_vm.sidebarVisible ? "sidebar-visible" : "")
+          (_vm.sidebarVisible ? "sidebar-visible" : ""),
+        style: { backgroundColor: _vm.getBackgroundColor + " !important" }
       },
       [
         _c("div", { staticClass: "account" }, [
@@ -38481,32 +38579,131 @@ var render = function() {
         _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "settings" }, [
-          _c("div", { staticClass: "setting row m-0" }, [
-            _c("span", [_vm._v("Font Family")]),
+          _c(
+            "div",
+            { staticClass: "setting row m-0" },
+            [
+              _c("span", { staticClass: "font-weight-bold mb-2" }, [
+                _vm._v("Font Family")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.settings["font-families"], function(
+                fontFamily,
+                index
+              ) {
+                return _c("div", { staticClass: "col-12" }, [
+                  _c("input", {
+                    attrs: {
+                      type: "radio",
+                      id: "family-" + index,
+                      name: "font-family"
+                    },
+                    domProps: {
+                      checked:
+                        _vm.$store.state.settings.settings["font-family"] ===
+                        fontFamily
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateSetting("font-family", fontFamily)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      style: { fontFamily: fontFamily + " !important" },
+                      attrs: { for: "family-" + index }
+                    },
+                    [_vm._v(_vm._s(fontFamily))]
+                  )
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "setting row m-0" },
+            [
+              _c("span", { staticClass: "font-weight-bold mb-2" }, [
+                _vm._v("Font Size")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.settings["font-sizes"], function(fontSize, index) {
+                return _c("div", { staticClass: "col-12" }, [
+                  _c("input", {
+                    attrs: {
+                      type: "radio",
+                      id: "size-" + index,
+                      name: "font-size"
+                    },
+                    domProps: {
+                      checked:
+                        _vm.$store.state.settings.settings["font-size"] ===
+                        fontSize
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateSetting("font-size", fontSize)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      style: {
+                        fontSize:
+                          (fontSize === "small"
+                            ? "10px"
+                            : fontSize === "large"
+                            ? "16px"
+                            : "13px") + " !important"
+                      },
+                      attrs: { for: "size-" + index }
+                    },
+                    [_vm._v(_vm._s(fontSize))]
+                  )
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting row m-0 mt-2" }, [
+            _c("span", { staticClass: "font-weight-bold" }, [
+              _vm._v("Dark Mode")
+            ]),
             _vm._v(" "),
-            _c("span", { staticClass: "ml-auto" }, [
-              _vm._v(_vm._s(_vm.$store.state.settings.settings["font-family"]))
+            _c("div", { staticClass: "custom-control custom-switch ml-auto" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "color-mode-switch" },
+                domProps: {
+                  checked:
+                    _vm.$store.state.settings.settings["color-mode"] === "dark"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.toggleDarkMode("color-mode")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "custom-control-label",
+                attrs: { for: "color-mode-switch" }
+              })
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "setting row m-0 mt-2" }, [
-            _c("span", [_vm._v("Font Size")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "ml-auto" }, [
-              _vm._v(_vm._s(_vm.$store.state.settings.settings["font-size"]))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting row m-0 mt-2" }, [
-            _c("span", [_vm._v("Color Mode")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "ml-auto" }, [
-              _vm._v(_vm._s(_vm.$store.state.settings.settings["color-mode"]))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting row m-0 mt-2" }, [
-            _c("span", [_vm._v("Primary Color")]),
+            _c("span", { staticClass: "font-weight-bold" }, [
+              _vm._v("Primary Color")
+            ]),
             _vm._v(" "),
             _c("span", { staticClass: "ml-auto" }, [
               _vm._v(
@@ -38516,18 +38713,56 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "setting row m-0 mt-2" }, [
-            _c("span", [_vm._v("Characters Count")]),
+            _c("span", { staticClass: "font-weight-bold" }, [
+              _vm._v("Characters Count")
+            ]),
             _vm._v(" "),
-            _c("span", { staticClass: "ml-auto" }, [
-              _vm._v(_vm._s(_vm.$store.state.settings.settings["char-count"]))
+            _c("div", { staticClass: "custom-control custom-switch ml-auto" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "char-count-switch" },
+                domProps: {
+                  checked:
+                    _vm.$store.state.settings.settings["char-count"] === "1"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.toggleSetting("char-count")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "custom-control-label",
+                attrs: { for: "char-count-switch" }
+              })
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "setting row m-0 mt-2" }, [
-            _c("span", [_vm._v("Autosave")]),
+            _c("span", { staticClass: "font-weight-bold" }, [
+              _vm._v("Autosave")
+            ]),
             _vm._v(" "),
-            _c("span", { staticClass: "ml-auto" }, [
-              _vm._v(_vm._s(_vm.$store.state.settings.settings["autosave"]))
+            _c("div", { staticClass: "custom-control custom-switch ml-auto" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "autosave-switch" },
+                domProps: {
+                  checked:
+                    _vm.$store.state.settings.settings["autosave"] === "1"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.toggleSetting("autosave")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", {
+                staticClass: "custom-control-label",
+                attrs: { for: "autosave-switch" }
+              })
             ])
           ])
         ]),
@@ -38538,6 +38773,7 @@ var render = function() {
           "div",
           {
             staticClass: "sidebar-toggle text-muted clickable hoverable",
+            style: { color: _vm.getFontColor + " !important" },
             on: {
               click: function($event) {
                 _vm.sidebarVisible = !_vm.sidebarVisible
@@ -51721,19 +51957,23 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _mixins_settingsManagement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mixins/settingsManagement */ "./resources/js/mixins/settingsManagement.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-_store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch('init'); // const files = require.context('./', true, /\.vue$/i);
+_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('init'); // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
+Vue.mixin(_mixins_settingsManagement__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component('plume', __webpack_require__(/*! ./components/Plume.vue */ "./resources/js/components/Plume.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -51744,7 +51984,7 @@ Vue.component('plume', __webpack_require__(/*! ./components/Plume.vue */ "./reso
 if (document.getElementById('plume')) {
   var app = new Vue({
     el: '#plume',
-    store: _store__WEBPACK_IMPORTED_MODULE_0__["default"]
+    store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
   });
 }
 
@@ -52406,6 +52646,48 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/mixins/settingsManagement.js":
+/*!***************************************************!*\
+  !*** ./resources/js/mixins/settingsManagement.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      fontSizes: {
+        small: '10px',
+        regular: '13px',
+        large: '16px'
+      },
+      backgroundColors: {
+        white: '#eeeeee',
+        dark: '#303437'
+      },
+      fontColors: {
+        white: '#303437',
+        dark: '#eeeeee'
+      }
+    };
+  },
+  computed: {
+    getFontSize: function getFontSize() {
+      return this.fontSizes[this.$store.state.settings.settings['font-size']];
+    },
+    getBackgroundColor: function getBackgroundColor() {
+      return this.backgroundColors[this.$store.state.settings.settings['color-mode']];
+    },
+    getFontColor: function getFontColor() {
+      return this.fontColors[this.$store.state.settings.settings['color-mode']];
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/index.js":
 /*!*************************************!*\
   !*** ./resources/js/store/index.js ***!
@@ -52456,6 +52738,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       var state = _ref.state,
           commit = _ref.commit,
           dispatch = _ref.dispatch;
+      window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.laravel.csrfToken;
       dispatch('initPages');
       dispatch('initSettings');
       dispatch('initUser');

@@ -12,7 +12,7 @@
   left: -99999999px;
 }
 
-* {
+.sidebar-container, .loader-container, .char-count-container {
   font-family: monospace;
 }
 
@@ -49,4 +49,9 @@ textarea,
   &:hover {
     cursor: pointer;
   }
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: $plume-yellow;
+  border-color: $plume-yellow;
 }

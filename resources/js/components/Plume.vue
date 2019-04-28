@@ -1,12 +1,19 @@
 <template>
-  <div class="plume-container">
-    <logo></logo>
-    <sidebar></sidebar>
-    <div contenteditable="true" id="page-editable" @input="pageChange"
-         :inner-html.prop="$store.state.pages.pages">
+  <div
+    :style="{color: `${getFontColor} !important`, backgroundColor: `${getBackgroundColor} !important`}"
+    class="w-100 plume">
+    <div class="plume-container">
+      <logo></logo>
+      <sidebar></sidebar>
+      <div contenteditable="true" id="page-editable" @input="pageChange"
+           :inner-html.prop="$store.state.pages.pages"
+           :style="{fontSize: `${getFontSize} !important`, fontFamily: `${$store.state.settings.settings['font-family']} !important`}">
+      </div>
+      <transition name="fade">
+        <char-count v-if="$store.state.settings.settings['char-count'] === '1'"></char-count>
+      </transition>
+      <loader :loading="false"></loader>
     </div>
-    <char-count></char-count>
-    <loader :loading="false"></loader>
   </div>
 </template>
 
@@ -25,7 +32,7 @@
     mixins: [keyboardManagement, parser],
     data() {
       return {
-        timeout: ''
+        out: ''
       }
     },
     methods: {
@@ -34,11 +41,14 @@
        */
       pageChange() {
         this.$store.commit('UPDATE_LENGTH', this.$el.querySelector('#page-editable').innerText.length)
-        this.$store.commit('TOGGLE_LOADING', true)
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          this.$store.dispatch('updatePages', this.$el.querySelector('#page-editable').innerHTML)
-        }, this.$store.state.loadingTimeout)
+
+        if (this.$store.state.settings.settings['autosave'] === '1') {
+          this.$store.commit('TOGGLE_LOADING', true)
+          clearTimeout(this.timeout)
+          this.timeout = setTimeout(() => {
+            this.$store.dispatch('updatePages', this.$el.querySelector('#page-editable').innerHTML)
+          }, this.$store.state.loadingTimeout)
+        }
       }
     },
     watch: {
@@ -51,6 +61,15 @@
 
 <style scoped lang="scss">
   @import '../../sass/_variables.scss';
+  @import '../../sass/_mixins.scss';
+
+  .plume {
+    -webkit-transition: background-color $default-transition-time, color $default-transition-time;
+    -moz-transition: background-color $default-transition-time, color $default-transition-time;
+    -ms-transition: background-color $default-transition-time, color $default-transition-time;
+    -o-transition: background-color $default-transition-time, color $default-transition-time;
+    transition: background-color $default-transition-time, color $default-transition-time;
+  }
 
   .plume-container {
     padding-top: 50px;

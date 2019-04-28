@@ -28,6 +28,8 @@ export default new Vuex.Store({
   },
   actions: {
     init({ state, commit, dispatch }) {
+      window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.laravel.csrfToken
+
       dispatch('initPages')
       dispatch('initSettings')
       dispatch('initUser')
