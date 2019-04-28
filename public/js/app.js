@@ -1938,6 +1938,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2082,13 +2083,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
-  data: function data() {
-    return {
-      sidebarVisible: false
-    };
-  },
   computed: {
     settings: function settings() {
       return window.settings;
@@ -6652,7 +6649,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  font-size: 13px;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  z-index: 99;\n  transition: all 0.2s;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n  transition: color 0.2s;\n}\n.sidebar-container .color-choice[data-v-81fbb27e] {\n  width: 20px;\n  height: 20px;\n  border-width: 2px !important;\n}\n.sidebar-container .color-choice.color-default[data-v-81fbb27e] {\n  background-color: rgba(244, 180, 0, 0.7);\n  border-color: rgba(244, 180, 0, 0.7) !important;\n}\n.sidebar-container .color-choice.color-blue[data-v-81fbb27e] {\n  background-color: rgba(23, 107, 230, 0.7);\n  border-color: rgba(23, 107, 230, 0.7) !important;\n}\n.sidebar-container .color-choice.color-green[data-v-81fbb27e] {\n  background-color: rgba(23, 156, 82, 0.7);\n  border-color: rgba(23, 156, 82, 0.7) !important;\n}\n.sidebar-container .color-choice.color-red[data-v-81fbb27e] {\n  background-color: rgba(255, 62, 48, 0.7);\n  border-color: rgba(255, 62, 48, 0.7) !important;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  position: fixed;\n  font-size: 13px;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  z-index: 99;\n  transition: all 0.2s;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n  transition: color 0.2s;\n}\n.sidebar-container .color-choice[data-v-81fbb27e] {\n  width: 20px;\n  height: 20px;\n  border-width: 2px !important;\n}\n.sidebar-container .color-choice.color-default[data-v-81fbb27e] {\n  background-color: rgba(244, 180, 0, 0.7);\n  border-color: rgba(244, 180, 0, 0.7) !important;\n}\n.sidebar-container .color-choice.color-blue[data-v-81fbb27e] {\n  background-color: rgba(23, 107, 230, 0.7);\n  border-color: rgba(23, 107, 230, 0.7) !important;\n}\n.sidebar-container .color-choice.color-green[data-v-81fbb27e] {\n  background-color: rgba(23, 156, 82, 0.7);\n  border-color: rgba(23, 156, 82, 0.7) !important;\n}\n.sidebar-container .color-choice.color-red[data-v-81fbb27e] {\n  background-color: rgba(255, 62, 48, 0.7);\n  border-color: rgba(255, 62, 48, 0.7) !important;\n}", ""]);
 
 // exports
 
@@ -38521,7 +38518,12 @@ var render = function() {
             },
             attrs: { contenteditable: "true", id: "page-editable" },
             domProps: { innerHTML: _vm.$store.state.pages.pages },
-            on: { input: _vm.pageChange }
+            on: {
+              input: _vm.pageChange,
+              click: function($event) {
+                return _vm.$store.commit("TOGGLE_SIDEBAR", false)
+              }
+            }
           }),
           _vm._v(" "),
           _c(
@@ -38579,7 +38581,7 @@ var render = function() {
         key: "sidebar",
         class:
           "sidebar-container p-3 " +
-          (_vm.sidebarVisible ? "sidebar-visible" : ""),
+          (_vm.$store.state.sidebarVisible ? "sidebar-visible" : ""),
         style: { backgroundColor: _vm.getBackgroundColor + " !important" }
       },
       [
@@ -38821,7 +38823,7 @@ var render = function() {
             style: { color: _vm.getFontColor + " !important" },
             on: {
               click: function($event) {
-                _vm.sidebarVisible = !_vm.sidebarVisible
+                return _vm.$store.commit("TOGGLE_SIDEBAR")
               }
             }
           },
@@ -52806,7 +52808,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     loading: false,
     loadingError: '',
     ajaxQueue: [],
-    loadingTimeout: 1500
+    loadingTimeout: 1500,
+    sidebarVisible: false
   },
   getters: {
     loading: function loading(state, getters) {
@@ -52830,6 +52833,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     AJAX_POP: function AJAX_POP(state, index) {
       state.ajaxQueue.splice(index, 1);
+    },
+    TOGGLE_SIDEBAR: function TOGGLE_SIDEBAR(state) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : !state.sidebarVisible;
+      state.sidebarVisible = value;
     }
   },
   actions: {

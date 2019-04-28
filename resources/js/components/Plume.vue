@@ -7,7 +7,8 @@
       <sidebar></sidebar>
       <div contenteditable="true" id="page-editable" @input="pageChange"
            :inner-html.prop="$store.state.pages.pages"
-           :style="{fontSize: `${getFontSize} !important`, fontFamily: `${$store.state.settings.settings['font-family']} !important`}">
+           :style="{fontSize: `${getFontSize} !important`, fontFamily: `${$store.state.settings.settings['font-family']} !important`}"
+           @click="$store.commit('TOGGLE_SIDEBAR', false)">
       </div>
       <transition name="fade">
         <char-count v-if="$store.state.settings.settings['char-count'] === '1'"></char-count>

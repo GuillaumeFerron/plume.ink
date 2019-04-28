@@ -11,7 +11,8 @@ export default new Vuex.Store({
     loading: false,
     loadingError: '',
     ajaxQueue: [],
-    loadingTimeout: 1500
+    loadingTimeout: 1500,
+    sidebarVisible: false
   },
   getters: {
     loading: (state, getters) => {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     AJAX_POP(state, index) {
       state.ajaxQueue.splice(index, 1)
+    },
+    TOGGLE_SIDEBAR(state, value = !state.sidebarVisible) {
+      state.sidebarVisible = value
     }
   },
   actions: {

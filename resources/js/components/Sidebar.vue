@@ -1,6 +1,7 @@
 <template>
   <transition name="fade">
-    <div :class="`sidebar-container p-3 ${sidebarVisible ? 'sidebar-visible' : ''}`" v-show="$store.state.pages.length"
+    <div :class="`sidebar-container p-3 ${$store.state.sidebarVisible ? 'sidebar-visible' : ''}`"
+         v-show="$store.state.pages.length"
          :style="{backgroundColor: `${getBackgroundColor} !important`}"
          key="sidebar">
       <div class="account">
@@ -74,7 +75,7 @@
         </div>
       </div>
       <hr>
-      <div class="sidebar-toggle text-muted clickable hoverable" @click="sidebarVisible = !sidebarVisible"
+      <div class="sidebar-toggle text-muted clickable hoverable" @click="$store.commit('TOGGLE_SIDEBAR')"
            :style="{color: `${getFontColor} !important`}"><i
         class="fa fa-ellipsis-h"></i></div>
     </div>
@@ -84,11 +85,6 @@
 <script>
   export default {
     name: 'Sidebar',
-    data() {
-      return {
-        sidebarVisible: false
-      }
-    },
     computed: {
       settings() {
         return window.settings
@@ -122,6 +118,7 @@
   @import '../../sass/_mixins.scss';
 
   .sidebar-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     position: fixed;
     font-size: 13px;
     bottom: 0;
