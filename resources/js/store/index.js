@@ -10,11 +10,12 @@ export default new Vuex.Store({
   state: {
     loading: false,
     loadingError: '',
+    ajaxQueue: [],
     loadingTimeout: 1500
   },
   getters: {
     loading: (state, getters) => {
-      return state.loading || getters.updating
+      return state.loading || getters.updating || state.ajaxQueue.length > 0
     },
     loadingError: state => state.loadingError
   },
@@ -24,6 +25,12 @@ export default new Vuex.Store({
     },
     ADD_LOADING_ERROR(state, value = 'Error !') {
       state.loadingError = value
+    },
+    AJAX_PUSH(state, url) {
+      state.ajaxQueue.push(url)
+    },
+    AJAX_POP(state, index) {
+      state.ajaxQueue.splice(index, 1)
     }
   },
   actions: {

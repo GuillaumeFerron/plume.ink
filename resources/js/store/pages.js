@@ -31,16 +31,12 @@ export default {
   },
   actions: {
     getPages({ state, commit }) {
-      commit('TOGGLE_LOADING', true)
-
       return new Promise((resolve, reject) => {
         window.axios.get(`/api/v1/pages?api_token=${laravel.apiToken}`)
           .then(response => {
             commit('UPDATE_PAGES', response.data.data.reduce((accumulator, currentValue, currentIndex) => {
               return currentIndex === 0 ? accumulator : accumulator += currentValue.body
             }, response.data.data[0].body))
-            commit('TOGGLE_LOADING', false)
-
             if (!state.contentInit) {
               // Leave timeout to let the store propagate the pages
               setTimeout(() => {
@@ -64,7 +60,6 @@ export default {
         dispatch('updatePage', 0)
           .then((response) => {
             console.log(response.data.message)
-            commit('TOGGLE_LOADING', false)
             commit('PAGE_DONE_UPDATING')
 
             resolve(response)
@@ -72,7 +67,6 @@ export default {
           .catch((error) => {
             console.log(error)
             commit('ADD_LOADING_ERROR', error.message)
-            commit('TOGGLE_LOADING', false)
             commit('PAGE_DONE_UPDATING')
 
             reject(error)

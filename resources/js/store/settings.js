@@ -13,7 +13,6 @@ export default {
       return new Promise((resolve, reject) => {
         window.axios.get(`/api/v1/settings?api_token=${laravel.apiToken}`)
           .then(response => {
-            commit('TOGGLE_LOADING', false)
             commit('UPDATE_SETTINGS', response.data.data)
 
             resolve(response)

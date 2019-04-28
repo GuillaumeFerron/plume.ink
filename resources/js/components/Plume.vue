@@ -25,11 +25,12 @@
   import parser from '../mixins/parser'
   import CharCount from './CharCount'
   import Logo from './Logo'
+  import ajaxManagement from '../mixins/ajaxManagement'
 
   export default {
     name: 'Plume',
     components: { Logo, CharCount, Sidebar, Loader, Page },
-    mixins: [keyboardManagement, parser],
+    mixins: [keyboardManagement, parser, ajaxManagement],
     data() {
       return {
         out: ''
@@ -41,12 +42,12 @@
        */
       pageChange() {
         this.$store.commit('UPDATE_LENGTH', this.$el.querySelector('#page-editable').innerText.length)
-
+        this.$store.commit('TOGGLE_LOADING', true)
         if (this.$store.state.settings.settings['autosave'] === '1') {
-          this.$store.commit('TOGGLE_LOADING', true)
           clearTimeout(this.timeout)
           this.timeout = setTimeout(() => {
             this.$store.dispatch('updatePages', this.$el.querySelector('#page-editable').innerHTML)
+            this.$store.commit('TOGGLE_LOADING', false)
           }, this.$store.state.loadingTimeout)
         }
       }

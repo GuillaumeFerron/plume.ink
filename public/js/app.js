@@ -1918,6 +1918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_parser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mixins/parser */ "./resources/js/mixins/parser.js");
 /* harmony import */ var _CharCount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CharCount */ "./resources/js/components/CharCount.vue");
 /* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Logo */ "./resources/js/components/Logo.vue");
+/* harmony import */ var _mixins_ajaxManagement__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../mixins/ajaxManagement */ "./resources/js/mixins/ajaxManagement.js");
 //
 //
 //
@@ -1937,6 +1938,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -1953,7 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
     Loader: _Loader__WEBPACK_IMPORTED_MODULE_1__["default"],
     Page: _Page__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mixins: [_mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_parser__WEBPACK_IMPORTED_MODULE_4__["default"]],
+  mixins: [_mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_parser__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_ajaxManagement__WEBPACK_IMPORTED_MODULE_7__["default"]],
   data: function data() {
     return {
       out: ''
@@ -1967,12 +1969,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$store.commit('UPDATE_LENGTH', this.$el.querySelector('#page-editable').innerText.length);
+      this.$store.commit('TOGGLE_LOADING', true);
 
       if (this.$store.state.settings.settings['autosave'] === '1') {
-        this.$store.commit('TOGGLE_LOADING', true);
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
           _this.$store.dispatch('updatePages', _this.$el.querySelector('#page-editable').innerHTML);
+
+          _this.$store.commit('TOGGLE_LOADING', false);
         }, this.$store.state.loadingTimeout);
       }
     }
@@ -52552,6 +52556,53 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/mixins/ajaxManagement.js":
+/*!***********************************************!*\
+  !*** ./resources/js/mixins/ajaxManagement.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    var _this = this;
+
+    window.axios.interceptors.request.use(function (config) {
+      _this.$store.commit('AJAX_PUSH', config.url);
+
+      return config;
+    }, function (error) {
+      var index = _this.$store.state.ajaxQueue.indexOf(error.config.url);
+
+      index !== -1 ? _this.$store.commit('AJAX_POP', index) : '';
+
+      _this.$store.commit('ADD_LOADING_ERROR', error.message);
+
+      return Promise.reject(error);
+    });
+    window.axios.interceptors.response.use(function (response) {
+      setTimeout(function () {
+        var index = _this.$store.state.ajaxQueue.indexOf(response.config.url);
+
+        index !== -1 ? _this.$store.commit('AJAX_POP', index) : '';
+      }, 200);
+      return response;
+    }, function (error) {
+      var index = _this.$store.state.ajaxQueue.indexOf(error.config.url);
+
+      index !== -1 ? _this.$store.commit('AJAX_POP', index) : '';
+
+      _this.$store.commit('ADD_LOADING_ERROR', error.message);
+
+      return Promise.reject(error);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/mixins/keyboardManagement.js":
 /*!***************************************************!*\
   !*** ./resources/js/mixins/keyboardManagement.js ***!
@@ -52713,11 +52764,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     loading: false,
     loadingError: '',
+    ajaxQueue: [],
     loadingTimeout: 1500
   },
   getters: {
     loading: function loading(state, getters) {
-      return state.loading || getters.updating;
+      return state.loading || getters.updating || state.ajaxQueue.length > 0;
     },
     loadingError: function loadingError(state) {
       return state.loadingError;
@@ -52731,6 +52783,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     ADD_LOADING_ERROR: function ADD_LOADING_ERROR(state) {
       var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Error !';
       state.loadingError = value;
+    },
+    AJAX_PUSH: function AJAX_PUSH(state, url) {
+      state.ajaxQueue.push(url);
+    },
+    AJAX_POP: function AJAX_POP(state, index) {
+      state.ajaxQueue.splice(index, 1);
     }
   },
   actions: {
@@ -52800,13 +52858,11 @@ __webpack_require__.r(__webpack_exports__);
     getPages: function getPages(_ref) {
       var state = _ref.state,
           commit = _ref.commit;
-      commit('TOGGLE_LOADING', true);
       return new Promise(function (resolve, reject) {
         window.axios.get("/api/v1/pages?api_token=".concat(laravel.apiToken)).then(function (response) {
           commit('UPDATE_PAGES', response.data.data.reduce(function (accumulator, currentValue, currentIndex) {
             return currentIndex === 0 ? accumulator : accumulator += currentValue.body;
           }, response.data.data[0].body));
-          commit('TOGGLE_LOADING', false);
 
           if (!state.contentInit) {
             // Leave timeout to let the store propagate the pages
@@ -52832,13 +52888,11 @@ __webpack_require__.r(__webpack_exports__);
       return new Promise(function (resolve, reject) {
         dispatch('updatePage', 0).then(function (response) {
           console.log(response.data.message);
-          commit('TOGGLE_LOADING', false);
           commit('PAGE_DONE_UPDATING');
           resolve(response);
         })["catch"](function (error) {
           console.log(error);
           commit('ADD_LOADING_ERROR', error.message);
-          commit('TOGGLE_LOADING', false);
           commit('PAGE_DONE_UPDATING');
           reject(error);
         });
@@ -52904,7 +52958,6 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit;
       return new Promise(function (resolve, reject) {
         window.axios.get("/api/v1/settings?api_token=".concat(laravel.apiToken)).then(function (response) {
-          commit('TOGGLE_LOADING', false);
           commit('UPDATE_SETTINGS', response.data.data);
           resolve(response);
         })["catch"](function (error) {
