@@ -5,9 +5,11 @@
       <div class="col-12"
            v-for="(fontFamily, index) in settings['font-families']">
         <input type="radio" :id="`family-${index}`" name="font-family"
+               class="clickable"
                :checked="$store.state.settings.settings['font-family'] === fontFamily"
                @click="updateSetting('font-family', fontFamily)">
-        <label :for="`family-${index}`" :style="{fontFamily: `${fontFamily} !important`}">{{ fontFamily }}</label>
+        <label :for="`family-${index}`" class="clickable" :style="{fontFamily: `${fontFamily} !important`}">{{
+          fontFamily }}</label>
       </div>
     </div>
     <div class="setting row m-0">
@@ -15,20 +17,21 @@
       <div class="col-12"
            v-for="(fontSize, index) in settings['font-sizes']">
         <input type="radio" :id="`size-${index}`" name="font-size"
+               class="clickable"
                :checked="$store.state.settings.settings['font-size'] === fontSize"
                @click="updateSetting('font-size', fontSize)">
-        <label :for="`size-${index}`"
+        <label :for="`size-${index}`" class="clickable"
                :style="{fontSize: `${fontSize === 'small' ? '10px' : fontSize === 'large' ? '16px' : '13px'} !important`}">{{
           fontSize }}</label>
       </div>
     </div>
     <div class="setting row m-0 mt-2">
       <span class="font-weight-bold">Dark Mode</span>
-      <div class="custom-control custom-switch ml-auto">
-        <input type="checkbox" class="custom-control-input" id="color-mode-switch"
+      <div class="custom-control clickable custom-switch ml-auto">
+        <input type="checkbox" class="custom-control-input clickable" id="color-mode-switch"
                :checked="$store.state.settings.settings['color-mode'] === 'dark'"
                @change="toggleDarkMode('color-mode')">
-        <label class="custom-control-label" for="color-mode-switch"></label>
+        <label class="custom-control-label clickable" for="color-mode-switch"></label>
       </div>
     </div>
     <div class="setting row m-0 mt-2">
@@ -43,22 +46,22 @@
         </div>
       </div>
     </div>
-    <div class="setting row m-0 mt-2">
+    <div class="setting row m-0 mt-4">
       <span class="font-weight-bold">Characters Count</span>
-      <div class="custom-control custom-switch ml-auto">
-        <input type="checkbox" class="custom-control-input" id="char-count-switch"
+      <div class="custom-control clickable custom-switch ml-auto">
+        <input type="checkbox" class="custom-control-input clickable" id="char-count-switch"
                :checked="$store.state.settings.settings['char-count'] === '1'"
                @change="toggleSetting('char-count')">
-        <label class="custom-control-label" for="char-count-switch"></label>
+        <label class="custom-control-label clickable" for="char-count-switch"></label>
       </div>
     </div>
     <div class="setting row m-0 mt-2">
       <span class="font-weight-bold">Autosave</span>
-      <div class="custom-control custom-switch ml-auto">
-        <input type="checkbox" class="custom-control-input" id="autosave-switch"
+      <div class="custom-control clickable custom-switch ml-auto">
+        <input type="checkbox" class="custom-control-input clickable" id="autosave-switch"
                :checked="$store.state.settings.settings['autosave'] === '1'"
                @change="toggleSetting('autosave')">
-        <label class="custom-control-label" for="autosave-switch"></label>
+        <label class="custom-control-label clickable" for="autosave-switch"></label>
       </div>
     </div>
   </div>

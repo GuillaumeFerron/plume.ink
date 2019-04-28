@@ -8,6 +8,8 @@
       <hr>
       <settings></settings>
       <hr>
+      <shortcuts v-if="$store.state.screenSize !== 'xs'"></shortcuts>
+      <hr v-if="$store.state.screenSize !== 'xs'">
       <div class="sidebar-toggle text-muted clickable hoverable" @click="$store.commit('TOGGLE_SIDEBAR')"
            :style="{color: `${getFontColor} !important`}"><i
         class="fa fa-ellipsis-h"></i></div>
@@ -18,35 +20,11 @@
 <script>
   import Settings from './Sidebar/Settings'
   import Account from './Sidebar/Account'
+  import Shortcuts from './Sidebar/Shortcuts'
 
   export default {
     name: 'Sidebar',
-    components: { Account, Settings },
-    computed: {
-      settings() {
-        return window.settings
-      }
-    },
-    methods: {
-      updateSetting(key, value) {
-        window.axios.post(`/api/v1/setting?api_token=${laravel.apiToken}`, {
-          key: key,
-          value: value
-        })
-          .then((response) => {
-            this.$store.commit('UPDATE_SETTINGS', response.data.data)
-          })
-      },
-      toggleDarkMode(key) {
-        this.updateSetting(key, $(`#${key}-switch`)[0].checked ? 'dark' : 'white')
-      },
-      toggleSetting(key) {
-        this.updateSetting(key, $(`#${key}-switch`)[0].checked ? '1' : '0')
-      },
-      toggleColor(color) {
-        this.updateSetting('primary-color', color)
-      }
-    }
+    components: { Shortcuts, Account, Settings }
   }
 </script>
 

@@ -57,8 +57,8 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../sass/_variables.scss';
-  @import '../../sass/_mixins.scss';
+  @import '../../../sass/_variables.scss';
+  @import '../../../sass/_mixins.scss';
 
   .loader-container {
     position: fixed;

@@ -12,7 +12,8 @@ export default new Vuex.Store({
     loadingError: '',
     ajaxQueue: [],
     loadingTimeout: 1500,
-    sidebarVisible: false
+    sidebarVisible: false,
+    screenSize: false
   },
   getters: {
     loading: (state, getters) => {
@@ -35,11 +36,27 @@ export default new Vuex.Store({
     },
     TOGGLE_SIDEBAR(state, value = !state.sidebarVisible) {
       state.sidebarVisible = value
+    },
+    /**
+     * Update the screenSize store data
+     *
+     * @param state
+     * @param value
+     * @constructor
+     */
+    SET_SCREEN_SIZE(state, value) {
+      state.screenSize = value
     }
   },
   actions: {
     init({ state, commit, dispatch }) {
       window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.laravel.csrfToken
+
+      commit('SET_SCREEN_SIZE', $(window).width() < 768 ? 'xs' : $(window).width() < 992 ? 'sm' : $(window).width() < 1200 ? 'md' : 'lg')
+
+      window.addEventListener('resize', () => {
+        commit('SET_SCREEN_SIZE', $(window).width() < 768 ? 'xs' : $(window).width() < 992 ? 'sm' : $(window).width() < 1200 ? 'md' : 'lg')
+      })
 
       dispatch('initPages')
       dispatch('initSettings')

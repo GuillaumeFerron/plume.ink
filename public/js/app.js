@@ -1763,18 +1763,13 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader */ "./resources/js/components/Loader.vue");
 //
 //
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Page',
-  components: {
-    Loader: _Loader__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   props: {
     page: {
       required: true,
@@ -1885,6 +1880,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sidebar_Settings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sidebar/Settings */ "./resources/js/components/Sidebar/Settings.vue");
 /* harmony import */ var _Sidebar_Account__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sidebar/Account */ "./resources/js/components/Sidebar/Account.vue");
+/* harmony import */ var _Sidebar_Shortcuts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Sidebar/Shortcuts */ "./resources/js/components/Sidebar/Shortcuts.vue");
 //
 //
 //
@@ -1902,39 +1898,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
   components: {
+    Shortcuts: _Sidebar_Shortcuts__WEBPACK_IMPORTED_MODULE_2__["default"],
     Account: _Sidebar_Account__WEBPACK_IMPORTED_MODULE_1__["default"],
     Settings: _Sidebar_Settings__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  computed: {
-    settings: function settings() {
-      return window.settings;
-    }
-  },
-  methods: {
-    updateSetting: function updateSetting(key, value) {
-      var _this = this;
-
-      window.axios.post("/api/v1/setting?api_token=".concat(laravel.apiToken), {
-        key: key,
-        value: value
-      }).then(function (response) {
-        _this.$store.commit('UPDATE_SETTINGS', response.data.data);
-      });
-    },
-    toggleDarkMode: function toggleDarkMode(key) {
-      this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? 'dark' : 'white');
-    },
-    toggleSetting: function toggleSetting(key) {
-      this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? '1' : '0');
-    },
-    toggleColor: function toggleColor(color) {
-      this.updateSetting('primary-color', color);
-    }
   }
 });
 
@@ -2039,6 +2013,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Settings',
   computed: {
@@ -2065,6 +2042,47 @@ __webpack_require__.r(__webpack_exports__);
     },
     toggleColor: function toggleColor(color) {
       this.updateSetting('primary-color', color);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sidebar/Shortcuts.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sidebar/Shortcuts.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Shortcuts',
+  computed: {
+    actionKey: function actionKey() {
+      return window.navigator.platform === 'MacIntel' ? '&#8984;' : 'CTRL';
     }
   }
 });
@@ -6695,9 +6713,17 @@ exports.push([module.i, "/**\n  Variables to be used throughout the application\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Widgets/CharCount.vue?vue&type=style&index=0&id=d9079f04&scoped=true&lang=scss& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n  @import '../../sass/_variables.scss';\n       ^\n      Can't find stylesheet to import.\n   ╷\n17 │ @import '../../sass/_variables.scss';\n   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   ╵\n  stdin 17:9  root stylesheet\n      in /Users/guillaumeferron/Sites/plumeink/resources/js/components/Widgets/CharCount.vue (line 17, column 9)");
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n.char-count-container[data-v-d9079f04] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n  transition: color 0.2s;\n}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -6706,9 +6732,17 @@ throw new Error("Module build failed (from ./node_modules/sass-loader/lib/loader
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Widgets/Loader.vue?vue&type=style&index=0&id=638b653e&scoped=true&lang=scss& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n  @import '../../sass/_variables.scss';\n       ^\n      Can't find stylesheet to import.\n   ╷\n60 │ @import '../../sass/_variables.scss';\n   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   ╵\n  stdin 60:9  root stylesheet\n      in /Users/guillaumeferron/Sites/plumeink/resources/js/components/Widgets/Loader.vue (line 60, column 9)");
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.loader-container[data-v-638b653e] {\n  position: fixed;\n  z-index: 99;\n  bottom: 15px;\n  right: 15px;\n}\n.hover-message[data-v-638b653e] {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.1);\n  border-radius: 4px;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  text-align: center;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-transform: translate(-100%, -110%);\n  transform: translate(-100%, -110%);\n}\n.loader-loading[data-v-638b653e] {\n  -webkit-animation: spin-data-v-638b653e 0.5s linear infinite;\n  animation: spin-data-v-638b653e 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-638b653e {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-638b653e {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -6717,9 +6751,17 @@ throw new Error("Module build failed (from ./node_modules/sass-loader/lib/loader
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Widgets/Logo.vue?vue&type=style&index=0&id=44ec5796&scoped=true&lang=scss& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n  @import '../../sass/_variables.scss';\n       ^\n      Can't find stylesheet to import.\n   ╷\n17 │ @import '../../sass/_variables.scss';\n   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   ╵\n  stdin 17:9  root stylesheet\n      in /Users/guillaumeferron/Sites/plumeink/resources/js/components/Widgets/Logo.vue (line 17, column 9)");
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n.logo-container[data-v-44ec5796] {\n  position: fixed;\n  top: 15px;\n  left: 15px;\n}\n.logo-container i[data-v-44ec5796] {\n  transition: color 0.2s;\n}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -38474,6 +38516,10 @@ var render = function() {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
+        _vm.$store.state.screenSize !== "xs" ? _c("shortcuts") : _vm._e(),
+        _vm._v(" "),
+        _vm.$store.state.screenSize !== "xs" ? _c("hr") : _vm._e(),
+        _vm._v(" "),
         _c(
           "div",
           {
@@ -38558,6 +38604,7 @@ var render = function() {
         _vm._l(_vm.settings["font-families"], function(fontFamily, index) {
           return _c("div", { staticClass: "col-12" }, [
             _c("input", {
+              staticClass: "clickable",
               attrs: {
                 type: "radio",
                 id: "family-" + index,
@@ -38578,6 +38625,7 @@ var render = function() {
             _c(
               "label",
               {
+                staticClass: "clickable",
                 style: { fontFamily: fontFamily + " !important" },
                 attrs: { for: "family-" + index }
               },
@@ -38600,6 +38648,7 @@ var render = function() {
         _vm._l(_vm.settings["font-sizes"], function(fontSize, index) {
           return _c("div", { staticClass: "col-12" }, [
             _c("input", {
+              staticClass: "clickable",
               attrs: { type: "radio", id: "size-" + index, name: "font-size" },
               domProps: {
                 checked:
@@ -38615,6 +38664,7 @@ var render = function() {
             _c(
               "label",
               {
+                staticClass: "clickable",
                 style: {
                   fontSize:
                     (fontSize === "small"
@@ -38636,25 +38686,30 @@ var render = function() {
     _c("div", { staticClass: "setting row m-0 mt-2" }, [
       _c("span", { staticClass: "font-weight-bold" }, [_vm._v("Dark Mode")]),
       _vm._v(" "),
-      _c("div", { staticClass: "custom-control custom-switch ml-auto" }, [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { type: "checkbox", id: "color-mode-switch" },
-          domProps: {
-            checked: _vm.$store.state.settings.settings["color-mode"] === "dark"
-          },
-          on: {
-            change: function($event) {
-              return _vm.toggleDarkMode("color-mode")
+      _c(
+        "div",
+        { staticClass: "custom-control clickable custom-switch ml-auto" },
+        [
+          _c("input", {
+            staticClass: "custom-control-input clickable",
+            attrs: { type: "checkbox", id: "color-mode-switch" },
+            domProps: {
+              checked:
+                _vm.$store.state.settings.settings["color-mode"] === "dark"
+            },
+            on: {
+              change: function($event) {
+                return _vm.toggleDarkMode("color-mode")
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", {
-          staticClass: "custom-control-label",
-          attrs: { for: "color-mode-switch" }
-        })
-      ])
+          }),
+          _vm._v(" "),
+          _c("label", {
+            staticClass: "custom-control-label clickable",
+            attrs: { for: "color-mode-switch" }
+          })
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "setting row m-0 mt-2" }, [
@@ -38695,58 +38750,136 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "setting row m-0 mt-2" }, [
+    _c("div", { staticClass: "setting row m-0 mt-4" }, [
       _c("span", { staticClass: "font-weight-bold" }, [
         _vm._v("Characters Count")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "custom-control custom-switch ml-auto" }, [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { type: "checkbox", id: "char-count-switch" },
-          domProps: {
-            checked: _vm.$store.state.settings.settings["char-count"] === "1"
-          },
-          on: {
-            change: function($event) {
-              return _vm.toggleSetting("char-count")
+      _c(
+        "div",
+        { staticClass: "custom-control clickable custom-switch ml-auto" },
+        [
+          _c("input", {
+            staticClass: "custom-control-input clickable",
+            attrs: { type: "checkbox", id: "char-count-switch" },
+            domProps: {
+              checked: _vm.$store.state.settings.settings["char-count"] === "1"
+            },
+            on: {
+              change: function($event) {
+                return _vm.toggleSetting("char-count")
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", {
-          staticClass: "custom-control-label",
-          attrs: { for: "char-count-switch" }
-        })
-      ])
+          }),
+          _vm._v(" "),
+          _c("label", {
+            staticClass: "custom-control-label clickable",
+            attrs: { for: "char-count-switch" }
+          })
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "setting row m-0 mt-2" }, [
       _c("span", { staticClass: "font-weight-bold" }, [_vm._v("Autosave")]),
       _vm._v(" "),
-      _c("div", { staticClass: "custom-control custom-switch ml-auto" }, [
-        _c("input", {
-          staticClass: "custom-control-input",
-          attrs: { type: "checkbox", id: "autosave-switch" },
-          domProps: {
-            checked: _vm.$store.state.settings.settings["autosave"] === "1"
-          },
-          on: {
-            change: function($event) {
-              return _vm.toggleSetting("autosave")
+      _c(
+        "div",
+        { staticClass: "custom-control clickable custom-switch ml-auto" },
+        [
+          _c("input", {
+            staticClass: "custom-control-input clickable",
+            attrs: { type: "checkbox", id: "autosave-switch" },
+            domProps: {
+              checked: _vm.$store.state.settings.settings["autosave"] === "1"
+            },
+            on: {
+              change: function($event) {
+                return _vm.toggleSetting("autosave")
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", {
-          staticClass: "custom-control-label",
-          attrs: { for: "autosave-switch" }
-        })
-      ])
+          }),
+          _vm._v(" "),
+          _c("label", {
+            staticClass: "custom-control-label clickable",
+            attrs: { for: "autosave-switch" }
+          })
+        ]
+      )
     ])
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sidebar/Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Sidebar/Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "shortcuts" }, [
+    _c("div", { staticClass: "setting row m-0" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _c("span", { domProps: { innerHTML: _vm._s(_vm.actionKey) } }),
+        _vm._v(" + B")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-small ml-auto font-weight-bold" }, [
+        _vm._v("Bold")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "setting row m-0" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _c("span", { domProps: { innerHTML: _vm._s(_vm.actionKey) } }),
+        _vm._v(" + I")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-small ml-auto font-italic" }, [
+        _vm._v("Italic")
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "setting row m-0 mt-3" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _c("span", { domProps: { innerHTML: _vm._s(_vm.actionKey) } }),
+        _vm._v(" + S")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-small ml-auto" }, [_vm._v("Save")])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "setting row m-0" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [_vm._v("CTRL + U")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-small ml-auto" }, [
+        _c("u", [_vm._v("Underline")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -52224,17 +52357,6 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Loader.vue":
-/*!********************************************!*\
-  !*** ./resources/js/components/Loader.vue ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/guillaumeferron/Sites/plumeink/resources/js/components/Loader.vue'");
-
-/***/ }),
-
 /***/ "./resources/js/components/Page.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Page.vue ***!
@@ -52629,6 +52751,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_341c5501_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_341c5501_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Sidebar/Shortcuts.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Sidebar/Shortcuts.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Shortcuts_vue_vue_type_template_id_67b469ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true& */ "./resources/js/components/Sidebar/Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true&");
+/* harmony import */ var _Shortcuts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Shortcuts.vue?vue&type=script&lang=js& */ "./resources/js/components/Sidebar/Shortcuts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Shortcuts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Shortcuts_vue_vue_type_template_id_67b469ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Shortcuts_vue_vue_type_template_id_67b469ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "67b469ff",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Sidebar/Shortcuts.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Sidebar/Shortcuts.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Sidebar/Shortcuts.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Shortcuts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Shortcuts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sidebar/Shortcuts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Shortcuts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Sidebar/Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Sidebar/Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Shortcuts_vue_vue_type_template_id_67b469ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Sidebar/Shortcuts.vue?vue&type=template&id=67b469ff&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Shortcuts_vue_vue_type_template_id_67b469ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Shortcuts_vue_vue_type_template_id_67b469ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -53105,7 +53296,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     loadingError: '',
     ajaxQueue: [],
     loadingTimeout: 1500,
-    sidebarVisible: false
+    sidebarVisible: false,
+    screenSize: false
   },
   getters: {
     loading: function loading(state, getters) {
@@ -53133,6 +53325,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     TOGGLE_SIDEBAR: function TOGGLE_SIDEBAR(state) {
       var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : !state.sidebarVisible;
       state.sidebarVisible = value;
+    },
+
+    /**
+     * Update the screenSize store data
+     *
+     * @param state
+     * @param value
+     * @constructor
+     */
+    SET_SCREEN_SIZE: function SET_SCREEN_SIZE(state, value) {
+      state.screenSize = value;
     }
   },
   actions: {
@@ -53141,6 +53344,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           commit = _ref.commit,
           dispatch = _ref.dispatch;
       window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.laravel.csrfToken;
+      commit('SET_SCREEN_SIZE', $(window).width() < 768 ? 'xs' : $(window).width() < 992 ? 'sm' : $(window).width() < 1200 ? 'md' : 'lg');
+      window.addEventListener('resize', function () {
+        commit('SET_SCREEN_SIZE', $(window).width() < 768 ? 'xs' : $(window).width() < 992 ? 'sm' : $(window).width() < 1200 ? 'md' : 'lg');
+      });
       dispatch('initPages');
       dispatch('initSettings');
       dispatch('initUser');

@@ -14,7 +14,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '../../sass/_variables.scss';
+  @import '../../../sass/_variables.scss';
 
   .logo-container {
     position: fixed;

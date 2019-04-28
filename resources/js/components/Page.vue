@@ -4,11 +4,8 @@
 </template>
 
 <script>
-  import Loader from './Loader'
-
   export default {
     name: 'Page',
-    components: { Loader },
     props: {
       page: {
         required: true,
