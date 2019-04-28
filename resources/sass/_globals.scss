@@ -12,41 +12,159 @@
   left: -99999999px;
 }
 
-* {
+.sidebar-container, .loader-container, .char-count-container {
   font-family: monospace;
 }
 
 main {
   min-height: 100vh;
-  background-color: #fff;
+  background-color: $color-white;
 }
 
-::selection {
-  background: $plume-yellow; /* WebKit/Blink Browsers */
-  opacity: 0.1;
-}
+.plume {
+  ::selection {
+    background: $plume-yellow; /* WebKit/Blink Browsers */
+    opacity: 0.1;
+  }
 
-::-moz-selection {
-  background: $plume-yellow-300; /* Gecko Browsers */
-}
+  ::-moz-selection {
+    background: $plume-yellow-300; /* Gecko Browsers */
+  }
 
-input,
-textarea,
-[contenteditable] {
-  caret-color: $plume-yellow;
-}
+  input,
+  textarea,
+  [contenteditable] {
+    caret-color: $plume-yellow;
+  }
 
-.hoverable {
-  @include transition();
+  .hoverable {
+    @include transition();
 
-  &:hover {
-    color: $plume-yellow !important;
-    cursor: default;
+    &:hover {
+      color: $plume-yellow !important;
+      cursor: default;
+    }
+  }
+
+  .clickable {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: $plume-yellow;
+    border-color: $plume-yellow;
   }
 }
 
-.clickable {
-  &:hover {
-    cursor: pointer;
+.plume.primary-blue {
+  ::selection {
+    background: $plume-blue; /* WebKit/Blink Browsers */
+    opacity: 0.1;
+  }
+
+  ::-moz-selection {
+    background: $plume-blue-300; /* Gecko Browsers */
+  }
+
+  input,
+  textarea,
+  [contenteditable] {
+    caret-color: $plume-blue;
+  }
+
+  .hoverable {
+    @include transition();
+
+    &:hover {
+      color: $plume-blue !important;
+      cursor: default;
+    }
+  }
+
+  .clickable {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: $plume-blue;
+    border-color: $plume-blue;
+  }
+}
+
+.plume.primary-red {
+  ::selection {
+    background: $plume-red; /* WebKit/Blink Browsers */
+    opacity: 0.1;
+  }
+
+  ::-moz-selection {
+    background: $plume-red-300; /* Gecko Browsers */
+  }
+
+  input,
+  textarea,
+  [contenteditable] {
+    caret-color: $plume-red;
+  }
+
+  .hoverable {
+    @include transition();
+
+    &:hover {
+      color: $plume-red !important;
+      cursor: default;
+    }
+  }
+
+  .clickable {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: $plume-red;
+    border-color: $plume-red;
+  }
+}
+
+.plume.primary-green {
+  ::selection {
+    background: $plume-green; /* WebKit/Blink Browsers */
+    opacity: 0.1;
+  }
+
+  ::-moz-selection {
+    background: $plume-green-300; /* Gecko Browsers */
+  }
+
+  input,
+  textarea,
+  [contenteditable] {
+    caret-color: $plume-green;
+  }
+
+  .hoverable {
+    @include transition();
+
+    &:hover {
+      color: $plume-green !important;
+      cursor: default;
+    }
+  }
+
+  .clickable {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: $plume-green;
+    border-color: $plume-green;
   }
 }

@@ -3,6 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import settingsManagement from './mixins/settingsManagement'
 
 require('./bootstrap')
 
@@ -10,9 +11,11 @@ window.Vue = require('vue')
 
 import store from './store'
 
+store.dispatch('init')
+
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
+Vue.mixin(settingsManagement)
 Vue.component('plume', require('./components/Plume.vue').default)
 
 /**
@@ -21,7 +24,7 @@ Vue.component('plume', require('./components/Plume.vue').default)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-if ($('#plume')) {
+if (document.getElementById('plume')) {
   const app = new Vue({
     el: '#plume',
     store

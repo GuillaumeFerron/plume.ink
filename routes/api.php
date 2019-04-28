@@ -13,6 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group([
+    'prefix' => config('api.version'),
+    'middleware' => ['auth']
+], function () {
+
+    // PAGES //
+    Route::get('/pages', 'PageController@index');
+    Route::post('/pages', 'PageController@edit');
+
+    // SETTINGS //
+    Route::get('/settings', 'SettingController@index');
+    Route::get('/setting', 'SettingController@get');
+    Route::post('/setting', 'SettingController@update');
 });

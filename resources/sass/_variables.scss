@@ -1,7 +1,7 @@
 /**
   Variables to be used throughout the application
  */
-
+/******* COLORS *******/
 $plume-yellow: rgba(244, 180, 0, 1);
 $plume-yellow-900: rgba(244, 180, 0, 0.9);
 $plume-yellow-800: rgba(244, 180, 0, 0.8);
@@ -13,10 +13,50 @@ $plume-yellow-300: rgba(244, 180, 0, 0.3);
 $plume-yellow-200: rgba(244, 180, 0, 0.2);
 $plume-yellow-100: rgba(244, 180, 0, 0.1);
 
-$sidebar-width: 250px;
+$plume-blue: rgba(23, 107, 230, 1);
+$plume-blue-900: rgba(23, 107, 230, 0.9);
+$plume-blue-800: rgba(23, 107, 230, 0.8);
+$plume-blue-700: rgba(23, 107, 230, 0.7);
+$plume-blue-600: rgba(23, 107, 230, 0.6);
+$plume-blue-500: rgba(23, 107, 230, 0.5);
+$plume-blue-400: rgba(23, 107, 230, 0.4);
+$plume-blue-300: rgba(23, 107, 230, 0.3);
+$plume-blue-200: rgba(23, 107, 230, 0.2);
+$plume-blue-100: rgba(23, 107, 230, 0.1);
 
+$plume-red: rgba(255, 62, 48, 1);
+$plume-red-900: rgba(255, 62, 48, 0.9);
+$plume-red-800: rgba(255, 62, 48, 0.8);
+$plume-red-700: rgba(255, 62, 48, 0.7);
+$plume-red-600: rgba(255, 62, 48, 0.6);
+$plume-red-500: rgba(255, 62, 48, 0.5);
+$plume-red-400: rgba(255, 62, 48, 0.4);
+$plume-red-300: rgba(255, 62, 48, 0.3);
+$plume-red-200: rgba(255, 62, 48, 0.2);
+$plume-red-100: rgba(255, 62, 48, 0.1);
+
+$plume-green: rgba(23, 156, 82, 1);
+$plume-green-900: rgba(23, 156, 82, 0.9);
+$plume-green-800: rgba(23, 156, 82, 0.8);
+$plume-green-700: rgba(23, 156, 82, 0.7);
+$plume-green-600: rgba(23, 156, 82, 0.6);
+$plume-green-500: rgba(23, 156, 82, 0.5);
+$plume-green-400: rgba(23, 156, 82, 0.4);
+$plume-green-300: rgba(23, 156, 82, 0.3);
+$plume-green-200: rgba(23, 156, 82, 0.2);
+$plume-green-100: rgba(23, 156, 82, 0.1);
+
+$color-dark: #303437;
+$color-white: #eeeeee;
+
+/******* LAYOUT *******/
+$sidebar-width: 250px;
 $page-padding: 15px;
 
+/******* ANIMATIONS ********/
+$default-transition-time: 0.2s;
+
+/******* BOOTSTRAP *********/
 $grid-breakpoints: () !default;
 $grid-breakpoints: map-merge(
                 (

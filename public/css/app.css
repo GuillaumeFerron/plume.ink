@@ -10670,6 +10670,14 @@ a.text-dark:focus {
   Variables to be used throughout the application
  */
 
+/******* COLORS *******/
+
+/******* LAYOUT *******/
+
+/******* ANIMATIONS ********/
+
+/******* BOOTSTRAP *********/
+
 /**
   Registers scss mixins rules
  */
@@ -10690,50 +10698,183 @@ a.text-dark:focus {
   left: -99999999px;
 }
 
-* {
+.sidebar-container,
+.loader-container,
+.char-count-container {
   font-family: monospace;
 }
 
 main {
   min-height: 100vh;
-  background-color: #fff;
+  background-color: #eeeeee;
 }
 
-::-moz-selection {
+.plume ::-moz-selection {
   background: #f4b400;
   /* WebKit/Blink Browsers */
   opacity: 0.1;
 }
 
-::selection {
+.plume ::selection {
   background: #f4b400;
   /* WebKit/Blink Browsers */
   opacity: 0.1;
 }
 
-::-moz-selection {
+.plume ::-moz-selection {
   background: rgba(244, 180, 0, 0.3);
   /* Gecko Browsers */
 }
 
-input,
-textarea,
-[contenteditable] {
+.plume input,
+.plume textarea,
+.plume [contenteditable] {
   caret-color: #f4b400;
 }
 
-.hoverable {
+.plume .hoverable {
   -ie-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
 
-.hoverable:hover {
+.plume .hoverable:hover {
   color: #f4b400 !important;
   cursor: default;
 }
 
-.clickable:hover {
+.plume .clickable:hover {
   cursor: pointer;
+}
+
+.plume .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #f4b400;
+  border-color: #f4b400;
+}
+
+.plume.primary-blue ::-moz-selection {
+  background: #176be6;
+  /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+.plume.primary-blue ::selection {
+  background: #176be6;
+  /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+.plume.primary-blue ::-moz-selection {
+  background: rgba(23, 107, 230, 0.3);
+  /* Gecko Browsers */
+}
+
+.plume.primary-blue input,
+.plume.primary-blue textarea,
+.plume.primary-blue [contenteditable] {
+  caret-color: #176be6;
+}
+
+.plume.primary-blue .hoverable {
+  -ie-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.plume.primary-blue .hoverable:hover {
+  color: #176be6 !important;
+  cursor: default;
+}
+
+.plume.primary-blue .clickable:hover {
+  cursor: pointer;
+}
+
+.plume.primary-blue .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #176be6;
+  border-color: #176be6;
+}
+
+.plume.primary-red ::-moz-selection {
+  background: #ff3e30;
+  /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+.plume.primary-red ::selection {
+  background: #ff3e30;
+  /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+.plume.primary-red ::-moz-selection {
+  background: rgba(255, 62, 48, 0.3);
+  /* Gecko Browsers */
+}
+
+.plume.primary-red input,
+.plume.primary-red textarea,
+.plume.primary-red [contenteditable] {
+  caret-color: #ff3e30;
+}
+
+.plume.primary-red .hoverable {
+  -ie-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.plume.primary-red .hoverable:hover {
+  color: #ff3e30 !important;
+  cursor: default;
+}
+
+.plume.primary-red .clickable:hover {
+  cursor: pointer;
+}
+
+.plume.primary-red .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #ff3e30;
+  border-color: #ff3e30;
+}
+
+.plume.primary-green ::-moz-selection {
+  background: #179c52;
+  /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+.plume.primary-green ::selection {
+  background: #179c52;
+  /* WebKit/Blink Browsers */
+  opacity: 0.1;
+}
+
+.plume.primary-green ::-moz-selection {
+  background: rgba(23, 156, 82, 0.3);
+  /* Gecko Browsers */
+}
+
+.plume.primary-green input,
+.plume.primary-green textarea,
+.plume.primary-green [contenteditable] {
+  caret-color: #179c52;
+}
+
+.plume.primary-green .hoverable {
+  -ie-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.plume.primary-green .hoverable:hover {
+  color: #179c52 !important;
+  cursor: default;
+}
+
+.plume.primary-green .clickable:hover {
+  cursor: pointer;
+}
+
+.plume.primary-green .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #179c52;
+  border-color: #179c52;
 }
 
 /**
@@ -10752,13 +10893,13 @@ textarea,
   Registers animations
  */
 
-.page-enter-active,
-.page-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s;
 }
 
-.page-enter,
-.page-leave-active {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 

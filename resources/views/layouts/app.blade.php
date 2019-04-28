@@ -76,9 +76,30 @@
     {{--            </div>--}}
     {{--        </nav>--}}
 
-    <main class="py-4">
+    <main>
+        <div class="row m-0">
+            @if(Route::current()->getName() === 'login')
+                <a class="btn btn-outline-secondary ml-auto mr-3"
+                   href="{{ route('register') }}">{{ __('Register') }}</a>
+            @elseif(Route::current()->getName() === 'register')
+                <a class="btn btn-outline-secondary ml-auto mr-3" href="{{ route('login') }}">{{ __('Login') }}</a>
+            @endif
+        </div>
         @yield('content')
     </main>
 </div>
 </body>
 </html>
+
+<script>
+  window.laravel = {!! json_encode([
+       'csrfToken' => csrf_token(),
+       'apiToken' => \Illuminate\Support\Facades\Auth::user() ? \Illuminate\Support\Facades\Auth::user()->api_token : null,
+   ]) !!}
+
+    window.maxLength = {{ intval(config('api.post_max_size') / config('api.utf8_max_char_size')) }}
+
+    window.user = {!! Illuminate\Support\Facades\Auth::user() !!}
+
+    window.settings = {!! json_encode(\App\Setting::getAllPossibleSettings()) !!}
+</script>
