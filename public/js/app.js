@@ -2074,6 +2074,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Sidebar',
   data: function data() {
@@ -2102,6 +2110,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     toggleSetting: function toggleSetting(key) {
       this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? '1' : '0');
+    },
+    toggleColor: function toggleColor(color) {
+      this.updateSetting('primary-color', color);
     }
   }
 });
@@ -6565,7 +6576,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.char-count-container[data-v-f41c6e04] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n  transition: color 0.2s;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n.char-count-container[data-v-f41c6e04] {\n  position: fixed;\n  top: 15px;\n  right: 15px;\n  transition: color 0.2s;\n}", ""]);
 
 // exports
 
@@ -6584,7 +6595,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 15px;\n  right: 15px;\n}\n.hover-message[data-v-e79ec684] {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.1);\n  border-radius: 4px;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  text-align: center;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-transform: translate(-100%, -110%);\n  transform: translate(-100%, -110%);\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.loader-container[data-v-e79ec684] {\n  position: fixed;\n  z-index: 99;\n  bottom: 15px;\n  right: 15px;\n}\n.hover-message[data-v-e79ec684] {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.1);\n  border-radius: 4px;\n  width: -webkit-fit-content;\n  width: -moz-fit-content;\n  width: fit-content;\n  text-align: center;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-transform: translate(-100%, -110%);\n  transform: translate(-100%, -110%);\n}\n.loader-loading[data-v-e79ec684] {\n  -webkit-animation: spin-data-v-e79ec684 0.5s linear infinite;\n  animation: spin-data-v-e79ec684 0.5s linear infinite;\n  height: 20px;\n  width: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n@-webkit-keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-e79ec684 {\n100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n}\n}", ""]);
 
 // exports
 
@@ -6603,7 +6614,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n.logo-container[data-v-1c796f16] {\n  position: fixed;\n  top: 15px;\n  left: 15px;\n}\n.logo-container i[data-v-1c796f16] {\n  transition: color 0.2s;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n.logo-container[data-v-1c796f16] {\n  position: fixed;\n  top: 15px;\n  left: 15px;\n}\n.logo-container i[data-v-1c796f16] {\n  transition: color 0.2s;\n}", ""]);
 
 // exports
 
@@ -6622,7 +6633,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.plume[data-v-70368d76] {\n  transition: background-color 0.2s, color 0.2s;\n}\n.plume-container[data-v-70368d76] {\n  padding-top: 50px;\n  padding-bottom: 50vh;\n}\n#page-editable[data-v-70368d76] {\n  max-width: 800px;\n  width: calc(100vw - 2 * 15px - 50px);\n  min-height: 80vh;\n  margin-left: auto;\n  margin-right: auto;\n}\n#page-editable[data-v-70368d76]:focus {\n  outline: none;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.plume[data-v-70368d76] {\n  transition: background-color 0.2s, color 0.2s;\n}\n.plume-container[data-v-70368d76] {\n  padding-top: 50px;\n  padding-bottom: 50vh;\n}\n#page-editable[data-v-70368d76] {\n  max-width: 800px;\n  width: calc(100vw - 2 * 15px - 50px);\n  min-height: 80vh;\n  margin-left: auto;\n  margin-right: auto;\n}\n#page-editable[data-v-70368d76]:focus {\n  outline: none;\n}", ""]);
 
 // exports
 
@@ -6641,7 +6652,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  font-size: 13px;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  z-index: 99;\n  transition: all 0.2s;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n  transition: color 0.2s;\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n/**\n  Registers scss mixins rules\n */\n/* if you need to transition a prefixed property, use this instead */\n.sidebar-container[data-v-81fbb27e] {\n  position: fixed;\n  font-size: 13px;\n  bottom: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  z-index: 99;\n  transition: all 0.2s;\n  -webkit-transform: translate(-100%, 0);\n  transform: translate(-100%, 0);\n  border-right: solid 1px lightgrey;\n}\n.sidebar-container.sidebar-visible[data-v-81fbb27e] {\n  -webkit-transform: translate3d(0, 0, 0);\n  transform: translate3d(0, 0, 0);\n}\n.sidebar-container .sidebar-toggle[data-v-81fbb27e] {\n  position: absolute;\n  bottom: 15px;\n  right: 0;\n  -webkit-transform: translate3d(calc(100% + 15px), 0, 0);\n  transform: translate3d(calc(100% + 15px), 0, 0);\n  transition: color 0.2s;\n}\n.sidebar-container .color-choice[data-v-81fbb27e] {\n  width: 20px;\n  height: 20px;\n  border-width: 2px !important;\n}\n.sidebar-container .color-choice.color-default[data-v-81fbb27e] {\n  background-color: rgba(244, 180, 0, 0.7);\n  border-color: rgba(244, 180, 0, 0.7) !important;\n}\n.sidebar-container .color-choice.color-blue[data-v-81fbb27e] {\n  background-color: rgba(23, 107, 230, 0.7);\n  border-color: rgba(23, 107, 230, 0.7) !important;\n}\n.sidebar-container .color-choice.color-green[data-v-81fbb27e] {\n  background-color: rgba(23, 156, 82, 0.7);\n  border-color: rgba(23, 156, 82, 0.7) !important;\n}\n.sidebar-container .color-choice.color-red[data-v-81fbb27e] {\n  background-color: rgba(255, 62, 48, 0.7);\n  border-color: rgba(255, 62, 48, 0.7) !important;\n}", ""]);
 
 // exports
 
@@ -38484,7 +38495,9 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "w-100 plume",
+      class:
+        "w-100 plume primary-" +
+        _vm.$store.state.settings.settings["primary-color"],
       style: {
         color: _vm.getFontColor + " !important",
         backgroundColor: _vm.getBackgroundColor + " !important"
@@ -38709,11 +38722,39 @@ var render = function() {
               _vm._v("Primary Color")
             ]),
             _vm._v(" "),
-            _c("span", { staticClass: "ml-auto" }, [
-              _vm._v(
-                _vm._s(_vm.$store.state.settings.settings["primary-color"])
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "col-12 d-flex justify-content-around mt-2" },
+              _vm._l(_vm.settings["primary-colors"], function(color) {
+                return _c(
+                  "div",
+                  {
+                    class:
+                      "color-choice clickable color-" +
+                      color +
+                      " rounded text-center " +
+                      (color ===
+                      _vm.$store.state.settings.settings["primary-color"]
+                        ? "border"
+                        : ""),
+                    on: {
+                      click: function($event) {
+                        return _vm.toggleColor(color)
+                      }
+                    }
+                  },
+                  [
+                    color ===
+                    _vm.$store.state.settings.settings["primary-color"]
+                      ? _c("i", {
+                          staticClass: "fa fa-check text-white font-weight-bold"
+                        })
+                      : _vm._e()
+                  ]
+                )
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "setting row m-0 mt-2" }, [

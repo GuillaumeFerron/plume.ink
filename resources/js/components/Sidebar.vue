@@ -44,7 +44,15 @@
         </div>
         <div class="setting row m-0 mt-2">
           <span class="font-weight-bold">Primary Color</span>
-          <span class="ml-auto">{{ $store.state.settings.settings['primary-color'] }}</span>
+          <div class="col-12 d-flex justify-content-around mt-2">
+            <div
+              :class="`color-choice clickable color-${color} rounded text-center ${color === $store.state.settings.settings['primary-color'] ? 'border' : ''}`"
+              v-for="color in settings['primary-colors']"
+              @click="toggleColor(color)">
+              <i class="fa fa-check text-white font-weight-bold"
+                 v-if="color === $store.state.settings.settings['primary-color']"></i>
+            </div>
+          </div>
         </div>
         <div class="setting row m-0 mt-2">
           <span class="font-weight-bold">Characters Count</span>
@@ -101,6 +109,9 @@
       },
       toggleSetting(key) {
         this.updateSetting(key, $(`#${key}-switch`)[0].checked ? '1' : '0')
+      },
+      toggleColor(color) {
+        this.updateSetting('primary-color', color)
       }
     }
   }
@@ -152,6 +163,32 @@
       -ms-transition: color $default-transition-time;
       -o-transition: color $default-transition-time;
       transition: color $default-transition-time;
+    }
+
+    .color-choice {
+      width: 20px;
+      height: 20px;
+      border-width: 2px !important;
+
+      &.color-default {
+        background-color: $plume-yellow-700;
+        border-color: $plume-yellow-700 !important;
+      }
+
+      &.color-blue {
+        background-color: $plume-blue-700;
+        border-color: $plume-blue-700 !important;
+      }
+
+      &.color-green {
+        background-color: $plume-green-700;
+        border-color: $plume-green-700 !important;
+      }
+
+      &.color-red {
+        background-color: $plume-red-700;
+        border-color: $plume-red-700 !important;
+      }
     }
   }
 </style>

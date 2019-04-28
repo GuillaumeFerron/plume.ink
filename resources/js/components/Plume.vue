@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{color: `${getFontColor} !important`, backgroundColor: `${getBackgroundColor} !important`}"
-    class="w-100 plume">
+    :class="`w-100 plume primary-${$store.state.settings.settings['primary-color']}`">
     <div class="plume-container">
       <logo></logo>
       <sidebar></sidebar>
