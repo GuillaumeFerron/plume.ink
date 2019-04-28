@@ -1797,6 +1797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Widgets_CharCount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Widgets/CharCount */ "./resources/js/components/Widgets/CharCount.vue");
 /* harmony import */ var _mixins_ajaxManagement__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../mixins/ajaxManagement */ "./resources/js/mixins/ajaxManagement.js");
 /* harmony import */ var _Widgets_Reload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Widgets/Reload */ "./resources/js/components/Widgets/Reload.vue");
+/* harmony import */ var _mixins_contentManagement__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../mixins/contentManagement */ "./resources/js/mixins/contentManagement.js");
 //
 //
 //
@@ -1817,6 +1818,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
@@ -1834,7 +1837,7 @@ __webpack_require__.r(__webpack_exports__);
     Loader: _Widgets_Loader__WEBPACK_IMPORTED_MODULE_1__["default"],
     Page: _Page__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mixins: [_mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_parser__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_ajaxManagement__WEBPACK_IMPORTED_MODULE_6__["default"]],
+  mixins: [_mixins_keyboardManagement__WEBPACK_IMPORTED_MODULE_3__["default"], _mixins_parser__WEBPACK_IMPORTED_MODULE_4__["default"], _mixins_ajaxManagement__WEBPACK_IMPORTED_MODULE_6__["default"], _mixins_contentManagement__WEBPACK_IMPORTED_MODULE_8__["default"]],
   data: function data() {
     return {
       out: ''
@@ -1854,7 +1857,9 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.commit('TOGGLE_LOADING', true);
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-          _this.$store.dispatch('updatePages', _this.$el.querySelector('#page-editable').innerHTML);
+          _this.$store.dispatch('updatePages', _this.$el.querySelector('#page-editable').innerHTML).then(function () {
+            _this.restoreCaretPosition();
+          });
 
           _this.$store.commit('TOGGLE_LOADING', false);
         }, this.$store.state.loadingTimeout);
@@ -2068,8 +2073,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (window.confirm('Are you sure ?')) {
         window.axios.post("/api/v1/setting/reset?api_token=".concat(laravel.apiToken)).then(function (response) {
-          console.log(response);
-
           _this2.$store.commit('UPDATE_SETTINGS', response.data.data);
         })["catch"](function (error) {
           _this2.$store.commit('UPDATE_SETTINGS', initialValue);
@@ -38482,6 +38485,9 @@ var render = function() {
               input: _vm.pageChange,
               click: function($event) {
                 return _vm.$store.commit("TOGGLE_SIDEBAR", false)
+              },
+              keydown: function($event) {
+                return _vm.getCaretPosition()
               }
             }
           }),
@@ -53211,6 +53217,42 @@ __webpack_require__.r(__webpack_exports__);
 
       return Promise.reject(error);
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/mixins/contentManagement.js":
+/*!**************************************************!*\
+  !*** ./resources/js/mixins/contentManagement.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      caretPos: 0
+    };
+  },
+  methods: {
+    getCaretPosition: function getCaretPosition() {
+      $('#page-editable')[0].focus();
+
+      var _range = document.getSelection().getRangeAt(0);
+
+      var range = _range.cloneRange();
+
+      range.selectNodeContents($('#page-editable')[0]);
+      range.setEnd(_range.endContainer, _range.endOffset);
+      this.caretPos = range.toString().length;
+    },
+    restoreCaretPosition: function restoreCaretPosition() {// $('#page-editable')[0].focus()
+      // const sel = window.getSelection()
+      // sel.collapse($('#page-editable')[0], this.caretPos)
+    }
   }
 });
 

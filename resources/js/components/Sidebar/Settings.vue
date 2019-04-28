@@ -119,7 +119,6 @@
         if (window.confirm('Are you sure ?')) {
           window.axios.post(`/api/v1/setting/reset?api_token=${laravel.apiToken}`)
             .then((response) => {
-              console.log(response)
               this.$store.commit('UPDATE_SETTINGS', response.data.data)
             })
             .catch(error => {

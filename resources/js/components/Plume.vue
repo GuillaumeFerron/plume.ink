@@ -8,7 +8,8 @@
       <div contenteditable="true" id="page-editable" @input="pageChange"
            :inner-html.prop="$store.state.pages.pages"
            :style="{fontSize: `${getFontSize} !important`, fontFamily: `${$store.state.settings.settings['font-family']} !important`}"
-           @click="$store.commit('TOGGLE_SIDEBAR', false)">
+           @click="$store.commit('TOGGLE_SIDEBAR', false)"
+           @keydown="getCaretPosition()">
       </div>
       <transition name="fade">
         <char-count v-if="$store.state.settings.settings['char-count'] === '1'"></char-count>
@@ -27,11 +28,12 @@
   import CharCount from './Widgets/CharCount'
   import ajaxManagement from '../mixins/ajaxManagement'
   import Reload from './Widgets/Reload'
+  import contentManagement from '../mixins/contentManagement'
 
   export default {
     name: 'Plume',
     components: { Reload, CharCount, Sidebar, Loader, Page },
-    mixins: [keyboardManagement, parser, ajaxManagement],
+    mixins: [keyboardManagement, parser, ajaxManagement, contentManagement],
     data() {
       return {
         out: ''
@@ -51,6 +53,9 @@
           clearTimeout(this.timeout)
           this.timeout = setTimeout(() => {
             this.$store.dispatch('updatePages', this.$el.querySelector('#page-editable').innerHTML)
+              .then(() => {
+                this.restoreCaretPosition()
+              })
             this.$store.commit('TOGGLE_LOADING', false)
           }, this.$store.state.loadingTimeout)
         }
