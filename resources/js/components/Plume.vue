@@ -20,12 +20,12 @@
 
 <script>
   import Page from './Page'
-  import Loader from './Loader'
+  import Loader from './Widgets/Loader'
   import Sidebar from './Sidebar'
   import keyboardManagement from '../mixins/keyboardManagement'
   import parser from '../mixins/parser'
-  import CharCount from './CharCount'
-  import Logo from './Logo'
+  import CharCount from './Widgets/CharCount'
+  import Logo from './Widgets/Logo'
   import ajaxManagement from '../mixins/ajaxManagement'
 
   export default {
