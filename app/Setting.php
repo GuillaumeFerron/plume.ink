@@ -13,7 +13,8 @@ class Setting extends Model
         'char-count' => '1',
         'autosave' => '1',
         'color-mode' => 'white',
-        'primary-color' => 'default'
+        'primary-color' => 'default',
+        'opening-position' => 'top'
     ];
 
     protected $fillable = ['user_id', 'app'];
@@ -106,5 +107,19 @@ class Setting extends Model
             'color-modes' => self::color_modes,
             'primary-colors' => self::primary_colors
         ];
+    }
+
+    /**
+     * Reset the setttings to initial values
+     *
+     * @return array|mixed
+     */
+    public function reset()
+    {
+        $this->app = json_encode(self::default_settings);
+
+        $this->save();
+
+        return json_decode($this->app);
     }
 }

@@ -2017,6 +2017,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Settings',
   computed: {
@@ -2041,11 +2054,27 @@ __webpack_require__.r(__webpack_exports__);
     toggleDarkMode: function toggleDarkMode(key) {
       this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? 'dark' : 'white');
     },
+    toggleOpeningPosition: function toggleOpeningPosition(key) {
+      this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? 'bottom' : 'top');
+    },
     toggleSetting: function toggleSetting(key) {
       this.updateSetting(key, $("#".concat(key, "-switch"))[0].checked ? '1' : '0');
     },
     toggleColor: function toggleColor(color) {
       this.updateSetting('primary-color', color);
+    },
+    resetSettings: function resetSettings() {
+      var _this2 = this;
+
+      if (window.confirm('Are you sure ?')) {
+        window.axios.post("/api/v1/setting/reset?api_token=".concat(laravel.apiToken)).then(function (response) {
+          console.log(response);
+
+          _this2.$store.commit('UPDATE_SETTINGS', response.data.data);
+        })["catch"](function (error) {
+          _this2.$store.commit('UPDATE_SETTINGS', initialValue);
+        });
+      }
     }
   }
 });
@@ -38788,6 +38817,38 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "setting row m-0 mt-4" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _vm._v("Start at the bottom")
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "custom-control clickable custom-switch ml-auto" },
+        [
+          _c("input", {
+            staticClass: "custom-control-input clickable",
+            attrs: { type: "checkbox", id: "opening-position-switch" },
+            domProps: {
+              checked:
+                _vm.$store.state.settings.settings["opening-position"] ===
+                "bottom"
+            },
+            on: {
+              change: function($event) {
+                return _vm.toggleOpeningPosition("opening-position")
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", {
+            staticClass: "custom-control-label clickable",
+            attrs: { for: "opening-position-switch" }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "setting row m-0 mt-2" }, [
       _c("span", { staticClass: "font-weight-bold" }, [_vm._v("Autosave")]),
       _vm._v(" "),
@@ -38813,6 +38874,22 @@ var render = function() {
             attrs: { for: "autosave-switch" }
           })
         ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "setting row m-0 mt-2" }, [
+      _c(
+        "span",
+        {
+          staticClass:
+            "font-weight-bold mx-auto col-6 text-center border rounded clickable",
+          on: {
+            click: function($event) {
+              return _vm.resetSettings()
+            }
+          }
+        },
+        [_vm._v("Reset")]
       )
     ])
   ])
@@ -53365,7 +53442,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       window.addEventListener('resize', function () {
         commit('SET_SCREEN_SIZE', $(window).width() < 768 ? 'xs' : $(window).width() < 992 ? 'sm' : $(window).width() < 1200 ? 'md' : 'lg');
       });
-      dispatch('initPages');
+      dispatch('initPages').then(function () {
+        console.log(state.settings.settings['opening-position']);
+        state.settings.settings['opening-position'] === 'bottom' ? $('html, body').animate({
+          scrollTop: $(document).height()
+        }, 'slow') : '';
+      });
       dispatch('initSettings');
       dispatch('initUser');
     }
@@ -53501,7 +53583,7 @@ __webpack_require__.r(__webpack_exports__);
       var state = _ref4.state,
           commit = _ref4.commit,
           dispatch = _ref4.dispatch;
-      dispatch('getPages');
+      return dispatch('getPages');
     }
   }
 });

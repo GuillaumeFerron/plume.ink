@@ -30,4 +30,5 @@ Route::group([
     Route::get('/settings', 'SettingController@index');
     Route::get('/setting', 'SettingController@get');
     Route::post('/setting', 'SettingController@update');
+    Route::post('/setting/reset', 'SettingController@reset');
 });

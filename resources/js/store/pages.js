@@ -105,7 +105,7 @@ export default {
       })
     },
     initPages({ state, commit, dispatch }) {
-      dispatch('getPages')
+      return dispatch('getPages')
     }
   }
 }

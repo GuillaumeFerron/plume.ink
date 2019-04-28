@@ -59,6 +59,9 @@ export default new Vuex.Store({
       })
 
       dispatch('initPages')
+        .then(() => {
+          state.settings.settings['opening-position'] === 'bottom' ? $('html, body').animate({ scrollTop: $(document).height() }, 'slow') : ''
+        })
       dispatch('initSettings')
       dispatch('initUser')
     }
