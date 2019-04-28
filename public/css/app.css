@@ -10733,6 +10733,10 @@ main {
 }
 
 .plume .hoverable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -ie-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
@@ -10740,6 +10744,13 @@ main {
 .plume .hoverable:hover {
   color: #f4b400 !important;
   cursor: default;
+}
+
+.plume .clickable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .plume .clickable:hover {
@@ -10894,6 +10905,45 @@ main {
   background-color: #eeeeee;
 }
 
+.plume-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  background-color: #fff;
+}
+
+.plume-loader .spinner {
+  position: absolute;
+  color: #f4b400;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-name: rotate;
+  -moz-animation-duration: 1000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: ease-in-out;
+  -ms-animation-name: rotate;
+  -ms-animation-duration: 1000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: ease-in-out;
+  animation-name: rotate;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.plume-loader .spinner i {
+  font-size: 20px;
+}
+
 /**
   Registers animations
  */
@@ -10906,5 +10956,27 @@ main {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 

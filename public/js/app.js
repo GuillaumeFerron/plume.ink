@@ -6795,7 +6795,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n.reload-container[data-v-079083c4] {\n  position: fixed;\n  bottom: 15px;\n  left: 15px;\n}\n.reload-container i[data-v-079083c4] {\n  transition: color 0.2s;\n}\n.reload-container.rotate[data-v-079083c4] {\n  -webkit-animation-name: rotate-data-v-079083c4;\n  -webkit-animation-duration: 1000ms;\n  -webkit-animation-iteration-count: infinite;\n  -webkit-animation-timing-function: ease-in-out;\n  -moz-animation-name: rotate-data-v-079083c4;\n  -moz-animation-duration: 1000ms;\n  -moz-animation-iteration-count: infinite;\n  -moz-animation-timing-function: ease-in-out;\n  -ms-animation-name: rotate-data-v-079083c4;\n  -ms-animation-duration: 1000ms;\n  -ms-animation-iteration-count: infinite;\n  -ms-animation-timing-function: ease-in-out;\n  animation-name: rotate-data-v-079083c4;\n  animation-duration: 1000ms;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out;\n}\n@-webkit-keyframes rotate-data-v-079083c4 {\nfrom {\n    -webkit-transform: rotate(0deg);\n}\nto {\n    -webkit-transform: rotate(360deg);\n}\n}\n@keyframes rotate-data-v-079083c4 {\nfrom {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n}\nto {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n}\n}", ""]);
+exports.push([module.i, "/**\n  Variables to be used throughout the application\n */\n/******* COLORS *******/\n/******* LAYOUT *******/\n/******* ANIMATIONS ********/\n/******* BOOTSTRAP *********/\n.reload-container[data-v-079083c4] {\n  position: fixed;\n  bottom: 15px;\n  left: 15px;\n}\n.reload-container i[data-v-079083c4] {\n  transition: color 0.2s;\n}\n.reload-container.rotate[data-v-079083c4] {\n  -webkit-animation-name: rotate;\n  -webkit-animation-duration: 1000ms;\n  -webkit-animation-iteration-count: infinite;\n  -webkit-animation-timing-function: ease-in-out;\n  -moz-animation-name: rotate;\n  -moz-animation-duration: 1000ms;\n  -moz-animation-iteration-count: infinite;\n  -moz-animation-timing-function: ease-in-out;\n  -ms-animation-name: rotate;\n  -ms-animation-duration: 1000ms;\n  -ms-animation-iteration-count: infinite;\n  -ms-animation-timing-function: ease-in-out;\n  animation-name: rotate;\n  animation-duration: 1000ms;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out;\n}", ""]);
 
 // exports
 
@@ -52364,14 +52364,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
- // const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+(function ($) {
+  $('.plume-loader').fadeOut('slow');
+})(jQuery);
 
 if (document.getElementById('plume')) {
   Vue.mixin(_mixins_settingsManagement__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -53443,7 +53440,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         commit('SET_SCREEN_SIZE', $(window).width() < 768 ? 'xs' : $(window).width() < 992 ? 'sm' : $(window).width() < 1200 ? 'md' : 'lg');
       });
       dispatch('initPages').then(function () {
-        console.log(state.settings.settings['opening-position']);
         state.settings.settings['opening-position'] === 'bottom' ? $('html, body').animate({
           scrollTop: $(document).height()
         }, 'slow') : '';
