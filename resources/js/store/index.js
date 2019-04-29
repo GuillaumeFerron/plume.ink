@@ -11,7 +11,7 @@ export default new Vuex.Store({
     loading: false,
     loadingError: '',
     ajaxQueue: [],
-    loadingTimeout: 1500,
+    loadingTimeout: 10000,
     sidebarVisible: false,
     screenSize: false
   },
@@ -59,6 +59,9 @@ export default new Vuex.Store({
       })
 
       dispatch('initPages')
+        .then(() => {
+          state.settings.settings['opening-position'] === 'bottom' ? $('html, body').animate({ scrollTop: $(document).height() }, 'slow') : ''
+        })
       dispatch('initSettings')
       dispatch('initUser')
     }

@@ -3,12 +3,13 @@
     :style="{color: `${getFontColor} !important`, backgroundColor: `${getBackgroundColor} !important`}"
     :class="`w-100 plume primary-${$store.state.settings.settings['primary-color']}`">
     <div class="plume-container">
-      <logo></logo>
+      <reload></reload>
       <sidebar></sidebar>
       <div contenteditable="true" id="page-editable" @input="pageChange"
            :inner-html.prop="$store.state.pages.pages"
            :style="{fontSize: `${getFontSize} !important`, fontFamily: `${$store.state.settings.settings['font-family']} !important`}"
-           @click="$store.commit('TOGGLE_SIDEBAR', false)">
+           @click="$store.commit('TOGGLE_SIDEBAR', false)"
+           @keydown="getCaretPosition()">
       </div>
       <transition name="fade">
         <char-count v-if="$store.state.settings.settings['char-count'] === '1'"></char-count>
@@ -25,13 +26,14 @@
   import keyboardManagement from '../mixins/keyboardManagement'
   import parser from '../mixins/parser'
   import CharCount from './Widgets/CharCount'
-  import Logo from './Widgets/Logo'
   import ajaxManagement from '../mixins/ajaxManagement'
+  import Reload from './Widgets/Reload'
+  import contentManagement from '../mixins/contentManagement'
 
   export default {
     name: 'Plume',
-    components: { Logo, CharCount, Sidebar, Loader, Page },
-    mixins: [keyboardManagement, parser, ajaxManagement],
+    components: { Reload, CharCount, Sidebar, Loader, Page },
+    mixins: [keyboardManagement, parser, ajaxManagement, contentManagement],
     data() {
       return {
         out: ''
@@ -43,11 +45,17 @@
        */
       pageChange() {
         this.$store.commit('UPDATE_LENGTH', this.$el.querySelector('#page-editable').innerText.length)
-        this.$store.commit('TOGGLE_LOADING', true)
+        this.$store.commit('CONTENT_MODIFIED')
+
         if (this.$store.state.settings.settings['autosave'] === '1') {
+          this.$store.commit('TOGGLE_LOADING', true)
+
           clearTimeout(this.timeout)
           this.timeout = setTimeout(() => {
             this.$store.dispatch('updatePages', this.$el.querySelector('#page-editable').innerHTML)
+              .then(() => {
+                this.restoreCaretPosition()
+              })
             this.$store.commit('TOGGLE_LOADING', false)
           }, this.$store.state.loadingTimeout)
         }

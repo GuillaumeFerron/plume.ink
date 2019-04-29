@@ -58,4 +58,24 @@ class SettingController extends Controller
             return response(['message' => 'Error saving the setting value.'], 500);
         }
     }
+
+    /**
+     * Reset the settings to initial values
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function reset()
+    {
+        try {
+            $settings = Auth::user()->setting->reset();
+
+            return response([
+                'data' => $settings,
+                'message' => 'Success resetting the settings.'
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response(['message' => 'Error resetting the settings.'], 500);
+        }
+    }
 }

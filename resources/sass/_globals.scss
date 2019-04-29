@@ -38,6 +38,10 @@ main {
   }
 
   .hoverable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     @include transition();
 
     &:hover {
@@ -47,6 +51,11 @@ main {
   }
 
   .clickable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     &:hover {
       cursor: pointer;
     }

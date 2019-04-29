@@ -20,10 +20,10 @@ export default {
       if ((this.cmdPressed || this.ctrlPressed) && e.keyCode === 82) {
         e.preventDefault()
 
-        if (this.$store.getters.loading && window.confirm('Page updating, your changes could be lost. Refresh ?')) {
-          window.location.reload()
+        if ((this.$store.getters.loading || this.$store.state.pages.modified) && window.confirm('Page modified, your changes could be lost. Refresh ?')) {
+          this.reload()
         } else if (!this.$store.getters.loading) {
-          window.location.reload()
+          this.reload()
         }
       }
     },
@@ -39,6 +39,16 @@ export default {
     clearKeys() {
       this.cmdPressed = false
       this.ctrlPressed = false
+    },
+    reload() {
+      $('.reload-container').addClass('rotate')
+      this.$store.dispatch('getPages')
+        .then((response) => {
+          $('.reload-container').removeClass('rotate')
+        })
+        .catch(() => {
+          $('.reload-container').removeClass('rotate')
+        })
     }
   },
   beforeDestroy() {

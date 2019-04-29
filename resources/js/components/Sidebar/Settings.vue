@@ -55,6 +55,15 @@
         <label class="custom-control-label clickable" for="char-count-switch"></label>
       </div>
     </div>
+    <div class="setting row m-0 mt-4">
+      <span class="font-weight-bold">Start at the bottom</span>
+      <div class="custom-control clickable custom-switch ml-auto">
+        <input type="checkbox" class="custom-control-input clickable" id="opening-position-switch"
+               :checked="$store.state.settings.settings['opening-position'] === 'bottom'"
+               @change="toggleOpeningPosition('opening-position')">
+        <label class="custom-control-label clickable" for="opening-position-switch"></label>
+      </div>
+    </div>
     <div class="setting row m-0 mt-2">
       <span class="font-weight-bold">Autosave</span>
       <div class="custom-control clickable custom-switch ml-auto">
@@ -63,6 +72,10 @@
                @change="toggleSetting('autosave')">
         <label class="custom-control-label clickable" for="autosave-switch"></label>
       </div>
+    </div>
+    <div class="setting row m-0 mt-2">
+      <span class="font-weight-bold mx-auto col-6 text-center border rounded clickable"
+            @click="resetSettings()">Reset</span>
     </div>
   </div>
 </template>
@@ -77,6 +90,8 @@
     },
     methods: {
       updateSetting(key, value) {
+        const initialValue = this.$store.state.settings.settings[key]
+
         window.axios.post(`/api/v1/setting?api_token=${laravel.apiToken}`, {
           key: key,
           value: value
@@ -84,15 +99,32 @@
           .then((response) => {
             this.$store.commit('UPDATE_SETTINGS', response.data.data)
           })
+          .catch(error => {
+            this.$store.commit('UPDATE_SETTINGS', initialValue)
+          })
       },
       toggleDarkMode(key) {
         this.updateSetting(key, $(`#${key}-switch`)[0].checked ? 'dark' : 'white')
+      },
+      toggleOpeningPosition(key) {
+        this.updateSetting(key, $(`#${key}-switch`)[0].checked ? 'bottom' : 'top')
       },
       toggleSetting(key) {
         this.updateSetting(key, $(`#${key}-switch`)[0].checked ? '1' : '0')
       },
       toggleColor(color) {
         this.updateSetting('primary-color', color)
+      },
+      resetSettings() {
+        if (window.confirm('Are you sure ?')) {
+          window.axios.post(`/api/v1/setting/reset?api_token=${laravel.apiToken}`)
+            .then((response) => {
+              this.$store.commit('UPDATE_SETTINGS', response.data.data)
+            })
+            .catch(error => {
+              this.$store.commit('UPDATE_SETTINGS', initialValue)
+            })
+        }
       }
     }
   }
