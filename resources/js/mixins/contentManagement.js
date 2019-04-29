@@ -6,18 +6,10 @@ export default {
   },
   methods: {
     getCaretPosition() {
-      $('#page-editable')[0].focus()
-      let _range = document.getSelection().getRangeAt(0)
-      let range = _range.cloneRange()
-      range.selectNodeContents($('#page-editable')[0])
-      range.setEnd(_range.endContainer, _range.endOffset)
-
-      this.caretPos = range.toString().length
+      this.caretPos = $('#page-editable').caret('pos') + 1
     },
     restoreCaretPosition() {
-      // $('#page-editable')[0].focus()
-      // const sel = window.getSelection()
-      // sel.collapse($('#page-editable')[0], this.caretPos)
+      $('#page-editable').caret('pos', this.caretPos)
     }
   }
 }

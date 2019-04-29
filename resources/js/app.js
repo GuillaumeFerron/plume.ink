@@ -6,6 +6,7 @@
 import settingsManagement from './mixins/settingsManagement'
 
 require('./bootstrap')
+require('./jquery.caret')
 
 window.Vue = require('vue')
 

@@ -11,7 +11,7 @@ export default new Vuex.Store({
     loading: false,
     loadingError: '',
     ajaxQueue: [],
-    loadingTimeout: 1500,
+    loadingTimeout: 10000,
     sidebarVisible: false,
     screenSize: false
   },
