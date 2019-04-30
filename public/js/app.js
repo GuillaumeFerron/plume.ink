@@ -1906,6 +1906,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -38540,8 +38545,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.$store.state.pages.length,
-            expression: "$store.state.pages.length"
+            value: _vm.$store.state.user,
+            expression: "$store.state.user"
           }
         ],
         key: "sidebar",
@@ -38562,6 +38567,22 @@ var render = function() {
         _vm.$store.state.screenSize !== "xs" ? _c("shortcuts") : _vm._e(),
         _vm._v(" "),
         _vm.$store.state.screenSize !== "xs" ? _c("hr") : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "setting row m-0 mt-2" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "font-weight-bold mx-auto col-6 text-center border rounded clickable",
+              on: {
+                click: function($event) {
+                  return _vm.logout()
+                }
+              }
+            },
+            [_vm._v("Logout\n      ")]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -38823,7 +38844,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "setting row m-0 mt-4" }, [
+    _c("div", { staticClass: "setting row m-0 mt-2" }, [
       _c("span", { staticClass: "font-weight-bold" }, [
         _vm._v("Start at the bottom")
       ]),
@@ -39000,8 +39021,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.$store.state.pages.length,
-            expression: "$store.state.pages.length"
+            value: _vm.$store.state.user,
+            expression: "$store.state.user"
           }
         ],
         staticClass: "char-count-container text-muted",
@@ -39045,8 +39066,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.$store.state.pages.length,
-            expression: "$store.state.pages.length"
+            value: _vm.$store.state.user,
+            expression: "$store.state.user"
           }
         ],
         key: "loader",
@@ -39174,8 +39195,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.$store.state.pages.length,
-            expression: "$store.state.pages.length"
+            value: _vm.$store.state.user,
+            expression: "$store.state.user"
           }
         ],
         key: "logo",
@@ -52360,6 +52381,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_settingsManagement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mixins/settingsManagement */ "./resources/js/mixins/settingsManagement.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _mixins_authManagement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mixins/authManagement */ "./resources/js/mixins/authManagement.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -52374,12 +52396,14 @@ __webpack_require__(/*! ./jquery.caret */ "./resources/js/jquery.caret.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
+
 (function ($) {
   $('.plume-loader').fadeOut('slow');
 })(jQuery);
 
 if (document.getElementById('plume')) {
   Vue.mixin(_mixins_settingsManagement__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  Vue.mixin(_mixins_authManagement__WEBPACK_IMPORTED_MODULE_2__["default"]);
   Vue.component('plume', __webpack_require__(/*! ./components/Plume.vue */ "./resources/js/components/Plume.vue")["default"]);
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('init');
   var app = new Vue({
@@ -53685,6 +53709,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/mixins/authManagement.js":
+/*!***********************************************!*\
+  !*** ./resources/js/mixins/authManagement.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    logout: function logout() {
+      window.location = '/logout';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/mixins/contentManagement.js":
 /*!**************************************************!*\
   !*** ./resources/js/mixins/contentManagement.js ***!
@@ -53832,12 +53875,12 @@ __webpack_require__.r(__webpack_exports__);
         large: '16px'
       },
       backgroundColors: {
-        white: '#eeeeee',
+        white: '#e8e6de',
         dark: '#303437'
       },
       fontColors: {
         white: '#303437',
-        dark: '#eeeeee'
+        dark: '#e8e6de'
       }
     };
   },
@@ -54007,9 +54050,11 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit;
       return new Promise(function (resolve, reject) {
         window.axios.get("/api/v1/pages?api_token=".concat(laravel.apiToken)).then(function (response) {
-          commit('UPDATE_PAGES', response.data.data.reduce(function (accumulator, currentValue, currentIndex) {
-            return currentIndex === 0 ? accumulator : accumulator += currentValue.body;
-          }, response.data.data[0].body));
+          if (response.data.data[0]) {
+            commit('UPDATE_PAGES', response.data.data.reduce(function (accumulator, currentValue, currentIndex) {
+              return currentIndex === 0 ? accumulator : accumulator += currentValue.body;
+            }, response.data.data[0].body));
+          }
 
           if (!state.contentInit) {
             // Leave timeout to let the store propagate the pages

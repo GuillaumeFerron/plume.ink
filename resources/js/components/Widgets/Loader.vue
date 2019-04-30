@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="loader-container text-muted" v-show="$store.state.pages.length" key="loader"
+    <div class="loader-container text-muted" v-show="$store.state.user" key="loader"
          :style="{color: `${getFontColor} !important`}">
       <transition name="fade">
         <div class="hover-message" v-if="hovered" :style="{top: top + 'px', left: left + 'px'}">

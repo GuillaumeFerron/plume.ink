@@ -7,12 +7,12 @@ export default {
         large: '16px'
       },
       backgroundColors: {
-        white: '#eeeeee',
+        white: '#e8e6de',
         dark: '#303437'
       },
       fontColors: {
         white: '#303437',
-        dark: '#eeeeee'
+        dark: '#e8e6de'
       }
     }
   },

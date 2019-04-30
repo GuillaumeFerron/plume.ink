@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div :class="`sidebar-container p-3 ${$store.state.sidebarVisible ? 'sidebar-visible' : ''}`"
-         v-show="$store.state.pages.length"
+         v-show="$store.state.user"
          :style="{backgroundColor: `${getBackgroundColor} !important`}"
          key="sidebar">
       <account></account>
@@ -10,6 +10,11 @@
       <hr>
       <shortcuts v-if="$store.state.screenSize !== 'xs'"></shortcuts>
       <hr v-if="$store.state.screenSize !== 'xs'">
+      <div class="setting row m-0 mt-2">
+        <div class="font-weight-bold mx-auto col-6 text-center border rounded clickable"
+             @click="logout()">Logout
+        </div>
+      </div>
       <div class="sidebar-toggle text-muted clickable hoverable" @click="$store.commit('TOGGLE_SIDEBAR')"
            :style="{color: `${getFontColor} !important`}"><i
         class="fa fa-ellipsis-h"></i></div>

@@ -10700,13 +10700,14 @@ a.text-dark:focus {
 
 .sidebar-container,
 .loader-container,
-.char-count-container {
+.char-count-container,
+.log-buttons {
   font-family: monospace;
 }
 
 main {
   min-height: 100vh;
-  background-color: #eeeeee;
+  background-color: #e8e6de;
 }
 
 .plume ::-moz-selection {
@@ -10902,7 +10903,7 @@ main {
 }
 
 .login-container .card {
-  background-color: #eeeeee;
+  background-color: #e8e6de;
 }
 
 .plume-loader {

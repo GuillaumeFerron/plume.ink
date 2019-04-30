@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Page;
 use App\Setting;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -78,6 +79,12 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'app' => json_encode(Setting::default_settings)
         ]);
+
+//        $page = Page::create([
+//            'user_id' => $user->id,
+//            'page_index' => 0,
+//            'body' => ''
+//        ]);
 
         $user->update([
             'setting_id' => $setting->id

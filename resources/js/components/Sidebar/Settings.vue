@@ -55,7 +55,7 @@
         <label class="custom-control-label clickable" for="char-count-switch"></label>
       </div>
     </div>
-    <div class="setting row m-0 mt-4">
+    <div class="setting row m-0 mt-2">
       <span class="font-weight-bold">Start at the bottom</span>
       <div class="custom-control clickable custom-switch ml-auto">
         <input type="checkbox" class="custom-control-input clickable" id="opening-position-switch"

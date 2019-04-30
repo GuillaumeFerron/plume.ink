@@ -77,7 +77,7 @@
     {{--        </nav>--}}
 
     <main>
-        <div class="row m-0">
+        <div class="row m-0 pt-3 log-buttons">
             @if(Route::current()->getName() === 'login')
                 <a class="btn btn-outline-secondary ml-auto mr-3"
                    href="{{ route('register') }}">{{ __('Register') }}</a>

@@ -38,9 +38,11 @@ export default {
       return new Promise((resolve, reject) => {
         window.axios.get(`/api/v1/pages?api_token=${laravel.apiToken}`)
           .then(response => {
-            commit('UPDATE_PAGES', response.data.data.reduce((accumulator, currentValue, currentIndex) => {
-              return currentIndex === 0 ? accumulator : accumulator += currentValue.body
-            }, response.data.data[0].body))
+            if (response.data.data[0]) {
+              commit('UPDATE_PAGES', response.data.data.reduce((accumulator, currentValue, currentIndex) => {
+                return currentIndex === 0 ? accumulator : accumulator += currentValue.body
+              }, response.data.data[0].body))
+            }
             if (!state.contentInit) {
               // Leave timeout to let the store propagate the pages
               setTimeout(() => {

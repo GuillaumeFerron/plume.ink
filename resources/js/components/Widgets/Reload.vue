@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="reload-container text-muted clickable" v-show="$store.state.pages.length" key="logo"
+    <div class="reload-container text-muted clickable" v-show="$store.state.user" key="logo"
          :style="{color: `${getFontColor} !important`}"
          @click="reload">
       <i class="fas fa-redo"></i>

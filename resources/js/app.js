@@ -11,6 +11,7 @@ require('./jquery.caret')
 window.Vue = require('vue')
 
 import store from './store'
+import authManagement from './mixins/authManagement'
 
 (function ($) {
   $('.plume-loader').fadeOut('slow')
@@ -18,6 +19,7 @@ import store from './store'
 
 if (document.getElementById('plume')) {
   Vue.mixin(settingsManagement)
+  Vue.mixin(authManagement)
   Vue.component('plume', require('./components/Plume.vue').default)
 
   store.dispatch('init')

@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="char-count-container text-muted" v-show="$store.state.pages.length"
+    <div class="char-count-container text-muted" v-show="$store.state.user"
          :style="{color: `${getFontColor} !important`}">
       {{ $store.state.pages.length }} characters
     </div>
