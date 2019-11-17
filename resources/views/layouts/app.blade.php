@@ -56,7 +56,7 @@
 
       gtag('js', new Date())
 
-      gtag('config', {{ env('GA_TAG', 'G-EX7HYEDE1K') }})
+      gtag('config', '{{ env('GA_TAG', 'G-EX7HYEDE1K') }}')
     </script>
 </head>
 <body>
