@@ -46,7 +46,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GA_TAG') }}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('GA_TAG', 'G-EX7HYEDE1K') }}"></script>
     <script>
       window.dataLayer = window.dataLayer || []
 
@@ -56,7 +56,7 @@
 
       gtag('js', new Date())
 
-      gtag('config', {{ env('GA_TAG') }})
+      gtag('config', {{ env('GA_TAG', 'G-EX7HYEDE1K') }})
     </script>
 </head>
 <body>
