@@ -4,7 +4,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Plume</title>
+    <title>{{ config('app.name', 'Plume.ink') }}</title>
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Plume.ink">
+    <meta name="description" content="Got something on your mind?
+Forget about overkill note-taking apps with way too many useless features and focus on what's important.
+Start writing now with Plume.ink !">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config('app.url', 'Plume.ink') }}">
+    <meta property="og:title" content="{{ config('app.name', 'Plume.ink') }}">
+    <meta property="og:description" content="Got something on your mind?
+Forget about overkill note-taking apps with way too many useless features and focus on what's important.
+Start writing now with Plume.ink !">
+    <meta property="og:image"
+          content="{{ asset('images/og_image.jpg') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ config('app.url', 'Plume.ink') }}">
+    <meta property="twitter:title" content="{{ config('app.name', 'Plume.ink') }}">
+    <meta property="twitter:description" content="Got something on your mind?
+Forget about overkill note-taking apps with way too many useless features and focus on what's important.
+Start writing now with Plume.ink !">
+    <meta property="twitter:image"
+          content="{{ asset('images/og_image.jpg') }}">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
